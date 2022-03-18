@@ -1,60 +1,56 @@
-const express = require('express');
-const cors = require('cors');
+const express = require( 'express' );
+const cors = require( 'cors' );
+const morgan = require( 'morgan' );
 
-const { dbConnection } = require('../database/config');
+const { dbConnection } = require( '../database/config' );
 
 class Server {
+	constructor() {
+		this.app = express();
+		this.port = process.env.PORT;
 
-    constructor() {
-        this.app  = express();
-        this.port = process.env.PORT;
+		this.usuariosPath = '/api/usuarios';
+		this.authPath = '/api/auth';
+		this.notesPath = '/api/notes';
 
-        this.usuariosPath = '/api/usuarios';
-        this.authPath     = '/api/auth';
+		// Conectar a base de datos
+		this.conectarDB();
 
-        // Conectar a base de datos
-        this.conectarDB();
+		// Middlewares
+		this.middlewares();
 
-        // Middlewares
-        this.middlewares();
+		// Rutas de mi aplicación
+		this.routes();
+	}
 
-        // Rutas de mi aplicación
-        this.routes();
-    }
+	async conectarDB() {
+		await dbConnection();
+	}
 
-    async conectarDB() {
-        await dbConnection();
-    }
+	middlewares() {
+		// Morgan
+		this.app.use( morgan( 'dev' ) );
 
+		// CORS
+		this.app.use( cors() );
 
-    middlewares() {
+		// Lectura y parseo del body
+		this.app.use( express.json() );
 
-        // CORS
-        this.app.use( cors() );
+		// Directorio Público
+		this.app.use( express.static( 'public' ) );
+	}
 
-        // Lectura y parseo del body
-        this.app.use( express.json() );
+	routes() {
+		this.app.use( this.authPath, require( '../routes/auth' ) );
+		this.app.use( this.usuariosPath, require( '../routes/usuarios' ) );
+		this.app.use( this.notesPath, require( '../routes/notes' ) );
+	}
 
-        // Directorio Público
-        this.app.use( express.static('public') );
-
-    }
-
-    routes() {
-        
-        this.app.use( this.authPath, require('../routes/auth'));
-        this.app.use( this.usuariosPath, require('../routes/usuarios'));
-    }
-
-    listen() {
-        this.app.listen( this.port, () => {
-            console.log('Servidor corriendo en puerto', this.port );
-        });
-    }
-
+	listen() {
+		this.app.listen( this.port, () => {
+			console.log( 'Servidor corriendo en puerto', this.port );
+		} );
+	}
 }
-
-
-
-
 module.exports = Server;

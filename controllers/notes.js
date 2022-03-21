@@ -6,40 +6,71 @@ const notesGet = async ( req, res = response ) => {
     try {
         const { user } = req;
         const notes = await Note.find( { user } );
-        if ( notes.length === 0 ) return res.json( { msg: 'no hay notas registradas para este usuario' } )
-        res.json( notes );
+        if ( notes.length === 0 ) return res.status( 202 ).json( { msg: 'there are no notes from this user yet' } );
+        res.status( 200 ).json( notes );
     } catch ( error ) {
-        res.json( { msg: 'algo salio mal', error } );
+        console.warn( error );
+        res.status( 500 );
     }
 }
 
 // CREATE A  NEW POST
 const notesPost = ( req, res = response ) => {
-    const { title, description, user } = req.body;
-    const note = new Note( { title, description, user } );
+    try {
+        const { title, description } = req.body;
+        const user = req.user._id;
+        const note = new Note( { title, description, user } );
+        note.save();
 
-    // guardar en db
-    note.save();
-
-    res.json( { msg: 'note added succesfully!', note } );
+        res.status( 201 ).json( { msg: 'note added succesfully!', note } );
+    } catch ( error ) {
+        console.warn( error );
+        res.status( 500 );
+    }
 }
 
 // GET A NOTE BY ITS ID
 const notesGetByID = async ( req, res = response ) => {
     try {
-
         const { id: noteID } = req.params;
-        const { _id: userID } = req.user;
+        const note = await Note.findOne( { $and: [ { user: req.user._id }, { _id: noteID } ] } );
+        if ( !note ) return res.status( 403 ).json( { msg: 'forbidden' } );
 
-        const note = await Note.findOne( { $and: [ { user: userID }, { _id: noteID } ] } );
-
-        if ( !note ) return res.json( { msg: 'forbidden' } );
-
-        res.json( note );
+        res.status( 200 ).json( note );
     } catch ( err ) {
         console.warn( err );
+        res.status( 500 );
     }
 }
 
 
-module.exports = { notesGet, notesPost, notesGetByID };
+// UPDATE A NOTE
+const notesPut = async ( req, res = response ) => {
+    try {
+        const { id } = req.params;
+        const { title, description } = req.body;
+        const note = await Note.findOneAndUpdate( { $and: [ { _id: id }, { user: req.user._id } ] }, { title, description } );
+        if ( !note ) return res.status( 403 ).json( { msg: 'forbidden' } );
+
+        res.status( 200 ).json( { msg: 'Note updated succesfuly' } )
+    } catch ( err ) {
+        console.warn( err );
+        res.status( 500 );
+    }
+}
+
+// DELETE A NOTE
+const notesDelete = async ( req, res = response ) => {
+    try {
+        const { id } = req.params;
+        const note = await Note.findOneAndDelete( { $and: [ { _id: id }, { user: req.user._id } ] } );
+        if ( !note ) return res.status( 403 ).json( { msg: 'forbidden' } );
+
+        res.status( 200 ).json( { msg: 'Note deleted succesfuly' } )
+    } catch ( err ) {
+        console.warn( err );
+        res.status( 500 );
+    }
+}
+
+module.exports = { notesGet, notesPost, notesGetByID, notesPut, notesDelete };

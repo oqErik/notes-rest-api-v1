@@ -19,6 +19,7 @@ const router = Router();
 
 router.get( '/', usuariosGet );
 
+// UPDATE A USER
 router.put( '/:id',
     [
         check( 'id', 'No es un ID válido' ).isMongoId(),
@@ -42,6 +43,7 @@ router.post( '/',
     ],
     usuariosPost );
 
+// DELETE A USER
 router.delete( '/:id',
     [
         validarJWT,
@@ -52,11 +54,5 @@ router.delete( '/:id',
         validarCampos
     ],
     usuariosDelete );
-
-router.patch( '/', usuariosPatch );
-
-
-
-
 
 module.exports = router;

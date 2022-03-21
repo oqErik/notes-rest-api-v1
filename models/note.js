@@ -14,6 +14,8 @@ const NoteSchema = Schema( {
         ref: 'Usuario',
         required: [ true, 'el usuario que crea esta vacio' ]
     }
+}, {
+    timestamps: true
 } );
 
 

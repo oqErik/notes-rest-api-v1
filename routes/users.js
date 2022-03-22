@@ -12,7 +12,7 @@ const {
     usuariosPut,
     usuariosPost,
     usuariosDelete,
-    usuariosPatch } = require( '../controllers/usuarios' );
+    usuariosPatch } = require( '../controllers/users' );
 
 const router = Router();
 

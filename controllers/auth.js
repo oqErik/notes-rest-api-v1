@@ -1,7 +1,7 @@
 const { response } = require( 'express' );
 const bcryptjs = require( 'bcryptjs' )
 
-const Usuario = require( '../models/usuario' );
+const Usuario = require( '../models/user' );
 
 const { generarJWT } = require( '../helpers/jwt' );
 
@@ -18,13 +18,6 @@ const login = async ( req, res = response ) => {
         if ( !usuario ) {
             return res.status( 400 ).json( {
                 msg: 'Usuario / Password no son correctos - correo'
-            } );
-        }
-
-        // SI el usuario está activo
-        if ( !usuario.estado ) {
-            return res.status( 400 ).json( {
-                msg: 'Usuario / Password no son correctos - estado: false'
             } );
         }
 

@@ -33,8 +33,9 @@ const notesPost = ( req, res = response ) => {
 const notesGetByID = async ( req, res = response ) => {
     try {
         const { id: noteID } = req.params;
-        const note = await Note.findOne( { $and: [ { user: req.user._id }, { _id: noteID } ] } );
-        if ( !note ) return res.status( 403 ).json( { msg: 'forbidden' } );
+        //const note = await Note.findOne( { $and: [ { user: req.user._id }, { _id: noteID } ] } );
+        const note = await Note.findOne( { user: req.user._id, _id: noteID } );
+        if ( !note ) return res.status( 401 ).json( { msg: 'Note dosnt exist' } );
 
         res.status( 200 ).json( note );
     } catch ( err ) {
@@ -49,8 +50,9 @@ const notesPut = async ( req, res = response ) => {
     try {
         const { id } = req.params;
         const { title, description } = req.body;
-        const note = await Note.findOneAndUpdate( { $and: [ { _id: id }, { user: req.user._id } ] }, { title, description } );
-        if ( !note ) return res.status( 403 ).json( { msg: 'forbidden' } );
+        //const note = await Note.findOneAndUpdate( { $and: [ { _id: id }, { user: req.user._id } ] }, { title, description } );
+        const note = await Note.findOneAndUpdate( { _id: id, user: req.user._id }, { title, description } );
+        if ( !note ) return res.status( 401 ).json( { msg: 'Note dosnt exist' } );
 
         res.status( 200 ).json( { msg: 'Note updated succesfuly' } )
     } catch ( err ) {
@@ -63,8 +65,9 @@ const notesPut = async ( req, res = response ) => {
 const notesDelete = async ( req, res = response ) => {
     try {
         const { id } = req.params;
-        const note = await Note.findOneAndDelete( { $and: [ { _id: id }, { user: req.user._id } ] } );
-        if ( !note ) return res.status( 403 ).json( { msg: 'forbidden' } );
+        //const note = await Note.findOneAndDelete( { $and: [ { _id: id }, { user: req.user._id } ] } );
+        const note = await Note.findOneAndDelete( { _id: id, user: req.user._id } );
+        if ( !note ) return res.status( 401 ).json( { msg: 'Note dosnt exist' } );
 
         res.status( 200 ).json( { msg: 'Note deleted succesfuly' } )
     } catch ( err ) {

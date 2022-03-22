@@ -1,7 +1,7 @@
 const { response, request } = require( 'express' );
 const bcryptjs = require( 'bcryptjs' );
 
-const Usuario = require( '../models/usuario' );
+const Usuario = require( '../models/user' );
 
 // GET ALL USERS
 const usuariosGet = async ( req = request, res = response ) => {
@@ -76,6 +76,10 @@ const usuariosDelete = async ( req, res = response ) => {
         console.warn( error );
         res.status( 500 );
     }
+
+
+
+
 }
 
 

@@ -11,10 +11,7 @@ const validarUser = async ( req, res = response, next ) => {
         // Verificar si el usuario es el mismo
         const { _id: userRequested } = usuario;
         const { _id: askedUser } = req.user;
-        // FIX THIS SOMEHOW THEY ARE DIFFERENT BEING BOTH OBJECTIDS
-        console.log( userRequested );
-        console.log( { askedUser } );
-        if ( userRequested != askedUser ) return res.status( 403 ).json( { msg: 'forbidden' } );
+        if ( String( userRequested ) !== String( askedUser ) ) return res.status( 403 ).json( { msg: 'forbidden' } );
 
         next();
     } catch ( error ) {

@@ -14,21 +14,6 @@ const notesGet = async ( req, res = response ) => {
     }
 }
 
-// CREATE A  NEW POST
-const notesPost = ( req, res = response ) => {
-    try {
-        const { title, description } = req.body;
-        const user = req.user._id;
-        const note = new Note( { title, description, user } );
-        note.save();
-
-        res.status( 201 ).json( { msg: 'note added succesfully!', note } );
-    } catch ( error ) {
-        console.warn( error );
-        res.status( 500 );
-    }
-}
-
 // GET A NOTE BY ITS ID
 const notesGetByID = async ( req, res = response ) => {
     try {
@@ -44,6 +29,20 @@ const notesGetByID = async ( req, res = response ) => {
     }
 }
 
+// CREATE A  NEW POST
+const notesPost = ( req, res = response ) => {
+    try {
+        const { title, description } = req.body;
+        const user = req.user._id;
+        const note = new Note( { title, description, user } );
+        note.save();
+
+        res.status( 201 ).json( { msg: 'note added succesfully!', note } );
+    } catch ( error ) {
+        console.warn( error );
+        res.status( 500 );
+    }
+}
 
 // UPDATE A NOTE
 const notesPut = async ( req, res = response ) => {

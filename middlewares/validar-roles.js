@@ -2,16 +2,20 @@ const { response } = require( 'express' )
 
 
 const esAdminRole = ( req, res = response, next ) => {
+    try {
+        const { role, nombre } = req.user;
 
-    const { role, nombre } = req.user;
+        if ( role !== 'ADMIN_ROLE' ) {
+            return res.status( 401 ).json( {
+                msg: `${nombre} no es administrador - No puede hacer esto`
+            } );
+        }
 
-    if ( role !== 'ADMIN_ROLE' ) {
-        return res.status( 401 ).json( {
-            msg: `${nombre} no es administrador - No puede hacer esto`
-        } );
+        next();
+    } catch ( error ) {
+        console.log( error );
     }
 
-    next();
 }
 
 /* 

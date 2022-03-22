@@ -6,11 +6,9 @@ const Usuario = require( '../models/user' );
 // GET ALL USERS
 const usuariosGet = async ( req = request, res = response ) => {
     try {
-        const query = { estado: true };
-
         const [ total, usuarios ] = await Promise.all( [
-            Usuario.countDocuments( query ),
-            Usuario.find( query )
+            Usuario.countDocuments(),
+            Usuario.find()
         ] );
 
         res.status( 200 ).json( {
@@ -27,17 +25,17 @@ const usuariosGet = async ( req = request, res = response ) => {
 const usuariosPost = async ( req, res = response ) => {
     try {
         const { nombre, correo, password, role } = req.body;
-        const usuario = new Usuario( { nombre, correo, password, role } );
+        const user = new Usuario( { nombre, correo, password, role } );
 
         // Encriptar la contraseña
         const salt = bcryptjs.genSaltSync();
-        usuario.password = bcryptjs.hashSync( password, salt );
+        user.password = bcryptjs.hashSync( password, salt );
 
         // Guardar en BD
-        await usuario.save();
+        await user.save();
 
-        res.status( 200 ).json( {
-            usuario
+        res.status( 201 ).json( {
+            msg: `User: ${user.nombre} created succesfully!`
         } );
     } catch ( error ) {
         console.warn( error );
@@ -46,11 +44,11 @@ const usuariosPost = async ( req, res = response ) => {
 
 }
 
-// UPDATE A USER
+// UPDATE A USER, ONLY SENT FIELDS WILL BE UPDATED. MAIL CANNOT BE UPDATED
 const usuariosPut = async ( req, res = response ) => {
     try {
         const { id } = req.params;
-        const { _id, password, google, correo, ...resto } = req.body;
+        const { _id, password, correo, ...resto } = req.body;
         if ( password ) {
             // Encriptar la contraseña
             const salt = bcryptjs.genSaltSync();
@@ -58,7 +56,7 @@ const usuariosPut = async ( req, res = response ) => {
         }
         const usuario = await Usuario.findByIdAndUpdate( id, resto );
 
-        res.satatus( 200 ).json( usuario );
+        res.status( 200 ).json( usuario );
     } catch ( error ) {
         console.warn( error );
         res.status( 500 );
@@ -69,9 +67,9 @@ const usuariosPut = async ( req, res = response ) => {
 const usuariosDelete = async ( req, res = response ) => {
     try {
         const { id } = req.params;
-        const usuario = await Usuario.findByIdAndUpdate( id, { estado: false } );
+        await Usuario.findByIdAndDelete( id );
 
-        res.status( 200 ).json( usuario );
+        res.status( 200 ).json( { msg: `User succesfully deleted` } );
     } catch ( error ) {
         console.warn( error );
         res.status( 500 );

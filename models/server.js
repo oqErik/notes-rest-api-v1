@@ -9,7 +9,7 @@ class Server {
 		this.app = express();
 		this.port = process.env.PORT;
 
-		this.usuariosPath = '/api/usuarios';
+		this.usuariosPath = '/api/users';
 		this.authPath = '/api/auth';
 		this.notesPath = '/api/notes';
 
@@ -49,7 +49,7 @@ class Server {
 
 	listen() {
 		this.app.listen( this.port, () => {
-			console.log( 'Servidor corriendo en puerto', this.port );
+			console.log( `Server runnin on port:  ${this.port}` );
 		} );
 	}
 }

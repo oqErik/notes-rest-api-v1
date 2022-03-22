@@ -24,6 +24,8 @@ const UsuarioSchema = Schema( {
         required: true,
         emun: [ 'ADMIN_ROLE', 'USER_ROLE' ]
     }
+}, {
+    timestamps: true
 } );
 
 

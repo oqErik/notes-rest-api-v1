@@ -17,7 +17,7 @@ const login = async ( req, res = response ) => {
         console.log( usuario );
         if ( !usuario ) {
             return res.status( 400 ).json( {
-                msg: 'Usuario / Password no son correctos - correo'
+                msg: 'User not found'
             } );
         }
 
@@ -25,7 +25,7 @@ const login = async ( req, res = response ) => {
         const validPassword = bcryptjs.compareSync( password, usuario.password );
         if ( !validPassword ) {
             return res.status( 400 ).json( {
-                msg: 'Usuario / Password no son correctos - password'
+                msg: 'Incorrect User/Pass'
             } );
         }
 
@@ -40,7 +40,7 @@ const login = async ( req, res = response ) => {
     } catch ( error ) {
         console.log( error )
         res.status( 500 ).json( {
-            msg: 'Hable con el administrador'
+            msg: 'Speak to an admin, something went wrong'
         } );
     }
 

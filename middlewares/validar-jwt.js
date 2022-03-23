@@ -10,7 +10,7 @@ const validarJWT = async ( req = request, res = response, next ) => {
 
     if ( !token ) {
         return res.status( 401 ).json( {
-            msg: 'No hay token en la petición'
+            msg: 'There is no token on the petition'
         } );
     }
 
@@ -24,7 +24,7 @@ const validarJWT = async ( req = request, res = response, next ) => {
 
         if ( !user ) {
             return res.status( 401 ).json( {
-                msg: 'Token no válido - usuario no existe DB'
+                msg: 'Token no valid'
             } )
         }
 
@@ -33,16 +33,16 @@ const validarJWT = async ( req = request, res = response, next ) => {
         next();
 
     } catch ( error ) {
-
-        console.log( error );
-        res.status( 401 ).json( {
-            msg: 'Token no válido / expirado'
+        // console.log( error );
+        return res.status( 401 ).json( {
+            msg: 'Token expired'
         } )
+
+
+
     }
 
 }
-
-
 
 
 module.exports = {

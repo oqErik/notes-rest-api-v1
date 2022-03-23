@@ -3,6 +3,7 @@ const cors = require( 'cors' );
 const morgan = require( 'morgan' );
 
 const { dbConnection } = require( '../database/config' );
+const req = require( 'express/lib/request' );
 
 class Server {
 	constructor() {
@@ -12,6 +13,7 @@ class Server {
 		this.usuariosPath = '/api/users';
 		this.authPath = '/api/auth';
 		this.notesPath = '/api/notes';
+		this.searchPath = '/api/search';
 
 		// Conectar a base de datos
 		this.conectarDB();
@@ -45,6 +47,7 @@ class Server {
 		this.app.use( this.authPath, require( '../routes/auth' ) );
 		this.app.use( this.usuariosPath, require( '../routes/users' ) );
 		this.app.use( this.notesPath, require( '../routes/notes' ) );
+		this.app.use( this.searchPath, require( '../routes/search' ) );
 	}
 
 	listen() {

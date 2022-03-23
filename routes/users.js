@@ -2,7 +2,7 @@
 const { Router } = require( 'express' );
 const { check } = require( 'express-validator' );
 
-const { validarCampos, validarJWT, esAdminRole, validarUsuario, validarUser } = require( '../middlewares' );
+const { validarCampos, validarJWT, validarUser } = require( '../middlewares' );
 
 
 const { emailExiste } = require( '../helpers/db-validators' );
@@ -14,9 +14,6 @@ const {
     usuariosDelete } = require( '../controllers/users' );
 
 const router = Router();
-
-// ONLY ADMINS CAN GET A FULL LIST OF ALL USERS
-router.get( '/', [ validarJWT, esAdminRole ], usuariosGet );
 
 // CREATE A NEW USER
 router.post( '/',

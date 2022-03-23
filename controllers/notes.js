@@ -1,4 +1,5 @@
 const { response } = require( "express" );
+
 const Note = require( '../models/note' );
 
 // GET ALL NOTES FROM USER

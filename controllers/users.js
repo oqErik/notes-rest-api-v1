@@ -1,25 +1,7 @@
-const { response, request } = require( 'express' );
+const { response } = require( 'express' );
 const bcryptjs = require( 'bcryptjs' );
 
 const Usuario = require( '../models/user' );
-
-// GET ALL USERS
-const usuariosGet = async ( req = request, res = response ) => {
-    try {
-        const [ total, usuarios ] = await Promise.all( [
-            Usuario.countDocuments(),
-            Usuario.find()
-        ] );
-
-        res.status( 200 ).json( {
-            total,
-            usuarios
-        } );
-    } catch ( error ) {
-        console.warn( error );
-        res.status( 500 );
-    }
-}
 
 // CREATE A NEW USER
 const usuariosPost = async ( req, res = response ) => {
@@ -74,15 +56,10 @@ const usuariosDelete = async ( req, res = response ) => {
         console.warn( error );
         res.status( 500 );
     }
-
-
-
-
 }
 
 
 module.exports = {
-    usuariosGet,
     usuariosPost,
     usuariosPut,
     usuariosDelete,

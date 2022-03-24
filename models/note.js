@@ -1,19 +1,20 @@
 const { Schema, model } = require( 'mongoose' );
-
+const { UserSchema } = require( '../models/user' )
 const NoteSchema = Schema( {
     title: {
         type: String,
-        required: [ true, 'El titulo es obligatorio' ]
+        required: [ true, 'title is empty' ]
     },
     description: {
         type: String,
-        required: [ true, 'Nota vacia!' ]
+        required: [ true, 'description is empty' ]
     },
     user: {
         type: Schema.Types.ObjectId,
         ref: 'Usuario',
-        required: [ true, 'el usuario que crea esta vacio' ]
+        required: [ true, 'user is empty' ]
     }
+
 }, {
     timestamps: true
 } );

@@ -4,16 +4,16 @@ const { Schema, model } = require( 'mongoose' );
 const UsuarioSchema = Schema( {
     nombre: {
         type: String,
-        required: [ true, 'El nombre es obligatorio' ]
+        required: [ true, 'name is empty' ]
     },
     correo: {
         type: String,
-        required: [ true, 'El correo es obligatorio' ],
+        required: [ true, 'email  is empty' ],
         unique: true
     },
     password: {
         type: String,
-        required: [ true, 'La contraseña es obligatoria' ],
+        required: [ true, 'password  is empty' ],
     },
     img: {
         type: String,
@@ -31,8 +31,8 @@ const UsuarioSchema = Schema( {
 
 
 UsuarioSchema.methods.toJSON = function () {
-    const { __v, password, _id, ...usuario } = this.toObject();
-    usuario.uid = _id;
+    const { __v, password, ...usuario } = this.toObject();
+
     return usuario;
 }
 

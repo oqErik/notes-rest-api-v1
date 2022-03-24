@@ -3,7 +3,7 @@ const cors = require( 'cors' );
 const morgan = require( 'morgan' );
 
 const { dbConnection } = require( '../database/config' );
-const req = require( 'express/lib/request' );
+
 
 class Server {
 	constructor() {

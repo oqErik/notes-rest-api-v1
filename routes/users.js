@@ -17,10 +17,10 @@ const router = Router();
 // CREATE A NEW USER
 router.post( '/',
     [
-        check( 'nombre', 'name is empty' ).not().isEmpty(),
+        check( 'name', 'name is empty' ).not().isEmpty(),
         check( 'password', 'password must contain at least 3 characters' ).isLength( { min: 3 } ),
-        check( 'correo', 'not a valid email' ).isEmail(),
-        check( 'correo' ).custom( emailExiste ),
+        check( 'email', 'not a valid email' ).isEmail(),
+        check( 'email' ).custom( emailExiste ),
         validarCampos
     ],
     usuariosPost );

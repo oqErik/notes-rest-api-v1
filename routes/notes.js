@@ -17,7 +17,7 @@ router.get( '/', [ validarJWT ], notesGet );
 router.get( '/:id',
     [
         validarJWT,
-        check( 'id', 'No es un ID válido' ).isMongoId(),
+        check( 'id', 'not a valid ID' ).isMongoId(),
         validarCampos
     ],
     notesGetByID );
@@ -27,8 +27,8 @@ router.get( '/:id',
 router.post( '/',
     [
         validarJWT,
-        check( 'title', 'el titulo esta vacio' ).not().isEmpty(),
-        check( 'description', 'La descripcion debe de ser más de 6 letras' ).isLength( { min: 6 } ),
+        check( 'title', 'title is empty' ).not().isEmpty(),
+        check( 'description', 'description must be more than 3 letters' ).isLength( { min: 3 } ),
         validarCampos
     ],
     notesPost );
@@ -37,9 +37,9 @@ router.post( '/',
 router.put( '/:id',
     [
         validarJWT,
-        check( 'id', 'No es un id valido' ).isMongoId(),
-        check( 'title', 'el titulo esta vacio' ).not().isEmpty(),
-        check( 'description', 'La descripcion debe de ser más de 6 letras' ).isLength( { min: 6 } ),
+        check( 'id', 'not a valid ID' ).isMongoId(),
+        check( 'title', 'title is empty' ).not().isEmpty(),
+        check( 'description', 'description must be more than 3 letters' ).isLength( { min: 3 } ),
         validarCampos
     ],
     notesPut );
@@ -48,7 +48,7 @@ router.put( '/:id',
 router.delete( '/:id',
     [
         validarJWT,
-        check( 'id', 'No es un id valido' ).isMongoId(),
+        check( 'id', 'not a valid ID' ).isMongoId(),
         validarCampos
     ],
     notesDelete );

@@ -1,12 +1,12 @@
 const Usuario = require( '../models/user' );
 const jwt = require( 'jsonwebtoken' );
 
-const emailExiste = async ( correo = '' ) => {
+const emailExiste = async ( email = '' ) => {
 
     // Verificar si el correo existe
-    const existeEmail = await Usuario.findOne( { correo } );
+    const existeEmail = await Usuario.findOne( { email } );
     if ( existeEmail ) {
-        throw new Error( `Mail: ${correo}, already exists` );
+        throw new Error( `Mail: ${email}, already exists` );
     }
 }
 
@@ -16,7 +16,7 @@ const checkAdmin = async ( token ) => {
         const { _id } = jwt.verify( token, process.env.SECRETORPRIVATEKEY );
         const user = await Usuario.findById( _id );
         if ( !user ) return false;
-        if ( user.role !== 'ADMIN_ROLE' ) return false;
+        if ( user.admin === false ) return false;
         return true;
     } catch ( error ) {
         console.warn( error );

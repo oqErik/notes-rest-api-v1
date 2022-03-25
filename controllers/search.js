@@ -29,7 +29,7 @@ const searchUsers = async ( req, res = response ) => {
             return res.status( 200 ).json( user );
         }
         const regex = new RegExp( term, 'i' );
-        const users = await Usuario.find( { $or: [ { nombre: regex }, { correo: regex }, { role: regex } ] } );
+        const users = await Usuario.find( { $or: [ { name: regex }, { email: regex } ] } );
 
         res.status( 200 ).json( { total: users.length, users } )
     } catch ( error ) {
@@ -42,7 +42,7 @@ const searchUsers = async ( req, res = response ) => {
 // GET A LIST OF ALL NOTES
 const allNotes = async ( req, res = response ) => {
     try {
-        const notes = await Note.find().populate( 'user', [ 'nombre', 'correo' ] )
+        const notes = await Note.find().populate( 'user', [ 'name', 'email' ] )
 
         res.status( 200 ).json( { total: notes.length, notes } );
     } catch ( error ) {
@@ -66,15 +66,12 @@ const searchNotes = async ( req, res = response ) => {
             return res.status( 200 ).json( note );
         }
 
-        let notes = await Note.find().populate( 'user', [ 'nombre', 'correo' ] );
-        //Note.countDocuments( { $or: [ { title: regex }, { description: regex }, { 'user.nombre': regex } ] } ),
-        //Note.find( { $or: [ { title: regex }, { description: regex } ] } ).populate( 'user', [ 'nombre', 'correo' ] )
-        //Note.find( { $or: [ { title: regex }, { description: regex } ] } ).populate( 'user', [ 'nombre', 'correo' ] )
-        //Note.find( { $or: [ { title: regex }, { description: regex } ] }, { 'user.nombre': regex } )
+        let notes = await Note.find().populate( 'user', [ 'name', 'email' ] );
+
 
         const regex = new RegExp( term, 'i' );
         notes = notes.filter( ( item ) => {
-            if ( regex.test( item.title ) || regex.test( item.description ) || regex.test( item.user.nombre ) ) return item;
+            if ( regex.test( item.title ) || regex.test( item.description ) || regex.test( item.user.name ) ) return item;
         } )
 
         res.json( { total: notes.length, notes } )

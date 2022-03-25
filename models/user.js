@@ -2,11 +2,11 @@
 const { Schema, model } = require( 'mongoose' );
 
 const UsuarioSchema = Schema( {
-    nombre: {
+    name: {
         type: String,
         required: [ true, 'name is empty' ]
     },
-    correo: {
+    email: {
         type: String,
         required: [ true, 'email  is empty' ],
         unique: true
@@ -19,11 +19,10 @@ const UsuarioSchema = Schema( {
         type: String,
         default: ''
     },
-    role: {
-        type: String,
+    admin: {
+        type: Boolean,
         required: true,
-        emun: [ 'ADMIN_ROLE', 'USER_ROLE' ],
-        default: 'USER_ROLE'
+        default: false
     }
 }, {
     timestamps: true

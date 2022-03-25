@@ -3,11 +3,11 @@ const { response } = require( 'express' )
 
 const esAdminRole = ( req, res = response, next ) => {
     try {
-        const { role, nombre } = req.user;
+        const { admin, name } = req.user;
 
-        if ( role !== 'ADMIN_ROLE' ) {
+        if ( admin !== true ) {
             return res.status( 401 ).json( {
-                msg: `${nombre} not an admin, cannot do that`
+                msg: `${name} not an admin, cannot do that`
             } );
         }
 

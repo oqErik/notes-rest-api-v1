@@ -1,13 +1,21 @@
 const { response } = require( 'express' );
 const bcryptjs = require( 'bcryptjs' );
 
+
 const Usuario = require( '../models/user' );
 const { generarJWT } = require( '../helpers/jwt' );
+const { checkAdmin } = require( '../helpers/db-validators' );
 
 // CREATE A NEW USER
+// ONLY ADMINS CAN CREATE OTHER ADMINS
 const usuariosPost = async ( req, res = response ) => {
     try {
-        const { nombre, correo, password, role } = req.body;
+        const { nombre, correo, password } = req.body;
+        let { role = 'USER_ROLE' } = req.body;
+
+        // Checar si admin
+        const isAdmin = await checkAdmin( req.header( 'token' ) )
+        if ( !isAdmin ) role = 'USER_ROLE';
         const user = new Usuario( { nombre, correo, password, role } );
 
         // Encriptar la contraseña
@@ -31,18 +39,24 @@ const usuariosPost = async ( req, res = response ) => {
 }
 
 // UPDATE A USER, ONLY SENT FIELDS WILL BE UPDATED. MAIL CANNOT BE UPDATED
+// ONLY ADMINS CAN UPDATE OTHER USERS OR USERS THEMSELVS
 const usuariosPut = async ( req, res = response ) => {
     try {
-        const { id } = req.params;
-        const { _id, password, correo, ...resto } = req.body;
+        const { id: idUsertoUpdate } = req.params;
+        const { password, correo, ...resto } = req.body;
+        // ECRYPT PASS
         if ( password ) {
-            // Encriptar la contraseña
             const salt = bcryptjs.genSaltSync();
             resto.password = bcryptjs.hashSync( password, salt );
         }
-        const usuario = await Usuario.findByIdAndUpdate( id, resto );
+        // IF ADMIN OR USER THEMSELF
+        if ( String( req.user.role ) === 'ADMIN_ROLE' || String( req.user._id ) === String( idUsertoUpdate ) ) {
+            const usertoUpdate = await Usuario.findByIdAndUpdate( idUsertoUpdate, resto );
+            if ( !usertoUpdate ) return res.status( 401 ).json( { msg: 'user not found' } );
+            return res.status( 200 ).json( { msg: `User: ${usertoUpdate.nombre} updated succesfully!` } );
+        }
 
-        res.status( 200 ).json( usuario );
+        res.status( 401 ).json( { msg: 'bad request' } );
     } catch ( error ) {
         console.warn( error );
         res.status( 500 );
@@ -50,12 +64,18 @@ const usuariosPut = async ( req, res = response ) => {
 }
 
 // DELETE A USER
+// ONLY ADMINS CAN DELETE OTHER USERS OR USERS THEMSELVS
 const usuariosDelete = async ( req, res = response ) => {
     try {
-        const { id } = req.params;
-        await Usuario.findByIdAndDelete( id );
+        const { id: idUsertoDelete } = req.params;
+        // IF ADMIN OR USER THEMSELF
+        if ( String( req.user.role ) === 'ADMIN_ROLE' || String( req.user._id ) === String( idUsertoDelete ) ) {
+            const userDelete = await Usuario.findByIdAndDelete( idUsertoDelete );
+            if ( !userDelete ) return res.status( 401 ).json( { msg: 'user not found' } );
+            return res.status( 200 ).json( { msg: `User: ${userDelete.nombre} deleted succesfully!` } );
+        }
 
-        res.status( 200 ).json( { msg: `User succesfully deleted` } );
+        res.status( 401 ).json( { msg: 'bad request' } );
     } catch ( error ) {
         console.warn( error );
         res.status( 500 );

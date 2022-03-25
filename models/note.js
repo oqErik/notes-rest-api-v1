@@ -19,5 +19,10 @@ const NoteSchema = Schema( {
     timestamps: true
 } );
 
+NoteSchema.methods.toJSON = function () {
+    const { __v, createdAt, updatedAt, ...note } = this.toObject();
+
+    return note;
+}
 
 module.exports = model( 'Note', NoteSchema );

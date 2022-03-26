@@ -49,8 +49,11 @@ const usuariosPut = async ( req, res = response ) => {
             const salt = bcryptjs.genSaltSync();
             resto.password = bcryptjs.hashSync( password, salt );
         }
-        // IF ADMIN OR USER THEMSELF
-        if ( req.user.admin === true || String( req.user._id ) === String( idUsertoUpdate ) ) {
+        // Checar si admin
+        const isAdmin = await checkAdmin( req.header( 'token' ) )
+        if ( !isAdmin ) resto.admin = false;
+        // UPDATE IF ADMIN OR LOGGED USER THEMSELF
+        if ( isAdmin || String( req.user._id ) === String( idUsertoUpdate ) ) {
             const usertoUpdate = await Usuario.findByIdAndUpdate( idUsertoUpdate, resto );
             if ( !usertoUpdate ) return res.status( 401 ).json( { msg: 'user not found' } );
             return res.status( 200 ).json( { msg: `User: ${usertoUpdate.name} updated succesfully!` } );

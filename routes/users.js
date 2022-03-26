@@ -17,8 +17,8 @@ const router = Router();
 // CREATE A NEW USER
 router.post( '/',
     [
-        check( 'name', 'name is empty' ).not().isEmpty(),
-        check( 'password', 'password must contain at least 3 characters' ).isLength( { min: 3 } ),
+        check( 'name', 'name must contain between 3 and 24 characters' ).isLength( { min: 3, max: 24 } ),
+        check( 'password', 'password must contain between 3 and 24 characters' ).isLength( { min: 3, max: 24 } ),
         check( 'email', 'not a valid email' ).isEmail(),
         check( 'email' ).custom( emailExiste ),
         validarCampos
@@ -29,6 +29,8 @@ router.post( '/',
 router.put( '/:id',
     [
         validarJWT,
+        check( 'name', 'name must contain between 3 and 24 characters' ).isLength( { min: 3, max: 24 } ),
+        check( 'password', 'password must contain between 3 and 24 characters' ).isLength( { min: 3, max: 24 } ),
         check( 'id', 'not a valid ID' ).isMongoId(),
         validarCampos
     ],

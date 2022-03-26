@@ -27,7 +27,7 @@ router.get( '/:id',
 router.post( '/',
     [
         validarJWT,
-        check( 'title', 'title is empty' ).not().isEmpty(),
+        check( 'title', 'title must be more than 3 letters ' ).isLength( { min: 3 } ),
         check( 'description', 'description must be more than 3 letters' ).isLength( { min: 3 } ),
         validarCampos
     ],
@@ -38,7 +38,7 @@ router.put( '/:id',
     [
         validarJWT,
         check( 'id', 'not a valid ID' ).isMongoId(),
-        check( 'title', 'title is empty' ).not().isEmpty(),
+        check( 'title', 'title must be more than 3 letters ' ).isLength( { min: 3 } ),
         check( 'description', 'description must be more than 3 letters' ).isLength( { min: 3 } ),
         validarCampos
     ],

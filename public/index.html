@@ -1,13 +1,1311 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso denegado</title>
-</head>
-<body>
+<html>
 
-    <h1>Acceso Denegado</h1>
+<head>
+    <title>Notes Rest API</title>
+    <meta name="csrf-param" content="authenticity_token">
+    <meta name="csrf-token"
+        content="AWC8nCCuuPwC8UwjP/LdXBHs9oYBe34L340M6Kiuh+7oKdH1ssJA1uCFGT5+eikn5dtujF+dr0LyMxM/0C0AWg==">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" media="all"
+        href="/assets/application-5d95b1fce75f3a3f2b8beb0e3370186af0451b3d79a571ea4f132b0a4fdec553.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <script src="https://kit.fontawesome.com/09425f7ba7.js" crossorigin="anonymous"></script>
+
+    <script src="/packs/js/application-b741f96cac10eb1d183b.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid" style="padding-right: 0; padding-left: 0;">
+
+    </div>
+
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal">Notes REST <strong>API</strong></h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="https://www.linkedin.com/in/erik-ortiz-q">LinkedIn</a>
+            <a class="p-2 text-dark" href="https://github.com/oqErik">GitHub</a>
+        </nav>
+    </div>
+
+    <div class="jumbotron bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="display-4 font-weight-bold">
+                        Documentation
+                    </h1>
+
+                    <p class="lead">
+                        A simple but efficient Rest API for users to create personal notes
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold">Introduction</h4>
+                        <hr>
+                        <p class="lead">
+                            This API allows you to make CRUD operations on <strong>Users</strong> and
+                            <strong>Notes</strong>, It uses MongoDB for the database and its completly done in NodeJS
+                            using Express library, it also have user authentication and Json web token for security.
+                            <br>
+                            The Database its been populated with some data so you can test it by yourself.
+                        </p>
+
+                        <p class="lead">
+                            You can download the repo on Github, I have posted it as public and you can find it <a
+                                href="https://github.com/oqErik/notes-rest-api-v1"> here</a>
+                        </p>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold">API Endpoints</h4>
+                        <p class="text-muted">Click on any endpoint to get more details</p>
+                        <hr>
+
+                        <p class="lead"><strong>Base URL:</strong>
+                            <code>https://notes-rest-api-v1.herokuapp.com/api</code>
+                        </p>
+
+                        <hr>
+                        <p class="lead"><strong>USERS</strong> </p>
+
+                        <a href="#addUser" style="color: rgb(33, 37, 41);">
+                            <p class="lead">
+                                <span class="badge badge-warning" style="width: 65px;">POST</span> - <strong>Add a new
+                                    user: </strong>
+                                <code>/users</code>
+                            </p>
+                        </a>
+
+                        <a href="#updateUser" style="color: rgb(33, 37, 41);">
+                            <p class="lead">
+                                <span class="badge badge-primary" style="width: 65px;">PUT</span> -
+                                <strong>Update a user: </strong>
+                                <code>/users/:id</code>
+                            </p>
+                        </a>
+
+                        <a href="#deleteUser" style="color: rgb(33, 37, 41);">
+                            <p class="lead">
+                                <span class="badge badge-danger" style="width: 65px;">DEL</span> -
+                                <strong>Delete a user: </strong>
+                                <code>/users/:id</code>
+                            </p>
+                        </a>
+
+                        <a href="#loginUser" style="color: rgb(33, 37, 41);">
+                            <p class="lead">
+                                <span class="badge badge-warning" style="width: 65px;">POST</span> - <strong>Login a
+                                    user:
+                                </strong>
+                                <code>/auth/login</code>
+                            </p>
+                        </a>
+
+                        <hr>
+                        <p class="lead"><strong>NOTES</strong> </p>
+
+                        <a href="#getNotes" style="color: rgb(33, 37, 41);">
+                            <p class="lead">
+                                <span class="badge badge-success" style="width: 65px;">GET</span> -
+                                <strong>Get all notes from a user: </strong>
+                                <code>/notes/</code>
+                            </p>
+                        </a>
+
+                        <a href="#getNotebyId" style="color: rgb(33, 37, 41);">
+                            <p class="lead">
+                                <span class="badge badge-success" style="width: 65px;">GET</span> -
+                                <strong>Get a note from its ID: </strong>
+                                <code>/notes/:id</code>
+                            </p>
+                        </a>
+
+                        <a href="#addNote" style="color: rgb(33, 37, 41);">
+                            <p class="lead">
+                                <span class="badge badge-warning" style="width: 65px;">POST</span> -
+                                <strong>Add a new note: </strong>
+                                <code>/notes</code>
+                            </p>
+                        </a>
+
+                        <a href="#updateNote" style="color: rgb(33, 37, 41);">
+                            <p class="lead">
+                                <span class="badge badge-primary" style="width: 65px;">PUT</span> -
+                                <strong>Update a note: </strong>
+                                <code>/notes/:id</code>
+                            </p>
+                        </a>
+
+                        <a href="#deleteNote" style="color: rgb(33, 37, 41);">
+                            <p class="lead">
+                                <span class="badge badge-danger" style="width: 65px;">DEL</span> -
+                                <strong>Delete a note: </strong>
+                                <code>/notes/:id</code>
+                            </p>
+                        </a>
+
+                        <hr>
+                        <p class="lead"><strong>SEARCH</strong> - Admin Section</p>
+
+                        <a href="#getAllUsers" style="color: rgb(33, 37, 41);">
+                            <p class="lead">
+                                <span class="badge badge-success" style="width: 65px;">GET</span> -
+                                <strong>Get all users: </strong>
+                                <code>/search/users</code>
+                            </p>
+                        </a>
+
+                        <a href="#getUserbyId" style="color: rgb(33, 37, 41);">
+                            <p class="lead">
+                                <span class="badge badge-success" style="width: 65px;">GET</span> -
+                                <strong>Get a user by its ID: </strong>
+                                <code>/search/users/:id</code>
+                            </p>
+                        </a>
+
+                        <a href="#searchUser" style="color: rgb(33, 37, 41);">
+                            <p class="lead">
+                                <span class="badge badge-success" style="width: 65px;">GET</span> -
+                                <strong>Search users by their Name or Mail: </strong>
+                                <code>/search/users/:params</code>
+                            </p>
+                        </a>
+
+                        <a href="#getAllNotes" style="color: rgb(33, 37, 41);">
+                            <p class="lead">
+                                <span class="badge badge-success" style="width: 65px;">GET</span> -
+                                <strong>Get all notes: </strong>
+                                <code>/search/notes</code>
+                            </p>
+                        </a>
+
+                        <a href="#getNoteByIdAdmin" style="color: rgb(33, 37, 41);">
+                            <p class="lead">
+                                <span class="badge badge-success" style="width: 65px;">GET</span> -
+                                <strong>Get a note by its ID: </strong>
+                                <code>/search/notes/:id</code>
+                            </p>
+                        </a>
+
+                        <a href="#searchNote" style="color: rgb(33, 37, 41);">
+                            <p class="lead">
+                                <span class="badge badge-success" style="width: 65px;">GET</span> -
+                                <strong>Search notes by their Title, Description or User: </strong>
+                                <code>/search/notes/:params</code>
+                            </p>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div id="addUser" class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"><span class="badge badge-warning"
+                                style="width: 65px;">POST</span> - <strong>Add a new
+                                user: </strong>
+                            <code>/users</code>
+                        </h4>
+                        <p class="text-muted">Add a new user. Only admins can add other admins</p>
+                        <hr>
+
+
+                        BODY:
+                        <p class="text-muted">(Content-Type application JSON)</p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string (min:3 max:24)</td>
+                                    <td>yes</td>
+                                </tr>
+                                <tr>
+                                    <td>email</td>
+                                    <td>string (has to be email format)</td>
+                                    <td>yes</td>
+                                </tr>
+                                <tr>
+                                    <td>password</td>
+                                    <td>string (min:3 max:24)</td>
+                                    <td>yes</td>
+                                </tr>
+                                <tr>
+                                    <td>img</td>
+                                    <td>string</td>
+                                    <td>no</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+                                    <td>boolean</td>
+                                    <td>no</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        HEADERS:
+                        <p class="text-muted">Only admins need this, since you have to be logged as admin to add a new
+                            admin</p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+                                    <td>string (valid JWT token)</td>
+                                    <td>no (yes only if you want another admin)</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+
+                        EXAMPLE: <p class="text-muted">Adding a new admin. For this we need two important things, set
+                            "admin" attribute to true and send our JWT on the headers section. To get a new JWT you can
+                            go to <a href="#loginUser">LOGIN USER </a> if you dont have one. </p>
+                        <p class="text-muted">Note: if you try to register an admin without this two parameters the API
+                            will register as a
+                            normal user. </p>
+                        <code>
+                            <strong>request: </strong> <br>
+                            https://notes-rest-api-v1.herokuapp.com/api/users <br>
+                             <strong>body: </strong> <br>
+                            { "name":"admin2", <br>
+                            "email":"admin2@fakemail.com",<br>
+                            "password":"admin2pass",<br>
+                            "admin": true } <br>
+                            <strong>headers: </strong> <br>
+                            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkMzBmOTMzMTY1YzgzMzZjMGYwODEiLCJpYXQiOjE2NDgyNDQ2NjgsImV4cCI6MTY0ODI1OTA2OH0.yWXfapipl8UMSBj1qjoU6IyW1gpG_3v8kDKgTpDhwKk"
+                        </code>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div id="updateUser" class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"><span class="badge badge-primary"
+                                style="width: 65px;">PUT</span> -
+                            <strong>Update a user: </strong>
+                            <code>/users/:id</code>
+                        </h4>
+                        <p class="text-muted"> Logged in users can only update their own information. Only admins can
+                            update other users and only admins can change normal users to admins. <br> Mail can not be
+                            updated and only sent params will be updated.</p>
+                        <hr>
+
+                        PARAMS:
+                        <p class="text-muted">:id has to be a valid MongoID. </p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>:id</td>
+                                    <td>string (valid MongoID)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        BODY:
+                        <p class="text-muted">(Content-Type application JSON)</p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string (min:3 max:24)</td>
+                                    <td>no</td>
+                                </tr>
+                                <tr>
+                                    <td>password</td>
+                                    <td>string (min:3 max:24)</td>
+                                    <td>no</td>
+                                </tr>
+                                <tr>
+                                    <td>img</td>
+                                    <td>string</td>
+                                    <td>no</td>
+                                </tr>
+                                <tr>
+                                    <td>admin</td>
+                                    <td>boolean</td>
+                                    <td>no</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        HEADERS:
+                        <p class="text-muted">If you are an admin you need to send a valid JWT logged as admin to change
+                            other users. </p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+                                    <td>string (valid JWT token)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+
+                        EXAMPLE: <p class="text-muted">Updating the name of a logged user <br> To get a new JWT you can
+                            go to <a href="#loginUser">LOGIN USER </a> if you dont have one. </p>
+                        <p class="text-muted">Note: if you try to change a user to an admin without sending a JWT logged
+                            as admin the API
+                            will send a bad request. </p>
+                        <code>
+                            <strong>request: </strong> <br>
+                            https://notes-rest-api-v1.herokuapp.com/api/users/623d30f933165c8336c0f081 <br>
+                             <strong>body: </strong> <br>
+                             { "name":"updated user name"} <br>
     
-</body>
+                            <strong>headers: </strong> <br>
+                            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkMzBmOTMzMTY1YzgzMzZjMGYwODEiLCJpYXQiOjE2NDgyNDQ2NjgsImV4cCI6MTY0ODI1OTA2OH0.yWXfapipl8UMSBj1qjoU6IyW1gpG_3v8kDKgTpDhwKk"
+                        </code>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div id="deleteUser" class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"><span class="badge badge-danger"
+                                style="width: 65px;">DEL</span> -
+                            <strong>Delete a user: </strong>
+                            <code>/users/:id</code>
+                        </h4>
+                        <p class="text-muted"> Logged in users can delete themselves. Only admins can
+                            delete other users.</p>
+                        PARAMS:
+                        <p class="text-muted">:id has to be a valid MongoID. </p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>:id</td>
+                                    <td>string (valid MongoID)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <hr>
+
+
+
+                        HEADERS:
+                        <p class="text-muted">If you are an admin you need to send a valid JWT logged as admin to delete
+                            other users. </p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+                                    <td>string (valid JWT token)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+
+                        EXAMPLE: <p class="text-muted">Deleting user. </p>
+                        <code>
+                            <strong>request: </strong> <br>
+                            https://notes-rest-api-v1.herokuapp.com/api/users/623d30f933165c8336c0f081 <br>
+                           
+                            <strong>headers: </strong> <br>
+                            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkMzBmOTMzMTY1YzgzMzZjMGYwODEiLCJpYXQiOjE2NDgyNDQ2NjgsImV4cCI6MTY0ODI1OTA2OH0.yWXfapipl8UMSBj1qjoU6IyW1gpG_3v8kDKgTpDhwKk"
+                        </code>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div id="loginUser" class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> <span class="badge badge-warning"
+                                style="width: 65px;">POST</span> - <strong>Login a
+                                user: <code>/auth/login</code>
+                            </strong>
+                        </h4>
+                        <p class="text-muted">LogIn user. The response of this request will be a JWT</p>
+                        <hr>
+
+
+                        BODY:
+                        <p class="text-muted">(Content-Type application JSON)</p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>email</td>
+                                    <td>string (has to be email format)</td>
+                                    <td>yes</td>
+                                </tr>
+                                <tr>
+                                    <td>password</td>
+                                    <td>string (min:3 max:24)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        EXAMPLE: <br>
+                        <code>
+                            <strong>request: </strong> <br>
+                            https://notes-rest-api-v1.herokuapp.com/api/auth/login <br>
+                             <strong>body: </strong> <br>
+                            { "email":"admin2@fakemail.com", <br>
+                            "password":"admin2pass"}<br>
+
+                           
+                        </code>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div id="getNotes" class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> <span class="badge badge-success"
+                                style="width: 65px;">GET</span> -
+                            <strong>Get all notes from a user: </strong>
+                            <code>/notes/</code>
+                        </h4>
+                        <p class="text-muted">Logged users can get all their notes</p>
+                        <hr>
+                        HEADERS:
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+                                    <td>string (valid JWT token)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        EXAMPLE: <br>
+                        <code>
+                            <strong>request: </strong> <br>
+                            https://notes-rest-api-v1.herokuapp.com/api/notes <br>
+                            <strong>headers: </strong> <br>
+                            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkMzBmOTMzMTY1YzgzMzZjMGYwODEiLCJpYXQiOjE2NDgyNDQ2NjgsImV4cCI6MTY0ODI1OTA2OH0.yWXfapipl8UMSBj1qjoU6IyW1gpG_3v8kDKgTpDhwKk"
+
+                           
+                        </code>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div id="getNotesbyId" class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> <span class="badge badge-success"
+                                style="width: 65px;">GET</span> -
+                            <strong>Get a note from its ID: </strong>
+                            <code>/notes/:id</code>
+                        </h4>
+                        <p class="text-muted">Logged users can get a specific note they have made</p>
+                        <hr>
+                        PARAMS:
+                        <p class="text-muted">:id has to be a valid MongoID. </p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>:id</td>
+                                    <td>string (valid MongoID)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        HEADERS:
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+                                    <td>string (valid JWT token)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        EXAMPLE: <br>
+                        <code>
+                            <strong>request: </strong> <br>
+                            https://notes-rest-api-v1.herokuapp.com/api/notes/623e53d6fcb791f994716601 <br>
+                            <strong>headers: </strong> <br>
+                            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkMzBmOTMzMTY1YzgzMzZjMGYwODEiLCJpYXQiOjE2NDgyNDQ2NjgsImV4cCI6MTY0ODI1OTA2OH0.yWXfapipl8UMSBj1qjoU6IyW1gpG_3v8kDKgTpDhwKk"
+
+                           
+                        </code>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div id="addNote" class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> <span class="badge badge-warning"
+                                style="width: 65px;">POST</span> -
+                            <strong>Add a new note: </strong>
+                            <code>/notes</code>
+                        </h4>
+                        <p class="text-muted">Logged users can make new notes by sending title and description</p>
+                        <hr>
+                        BODY:
+                        <p class="text-muted">(Content-Type application JSON)</p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>title</td>
+                                    <td>string (min:3)</td>
+                                    <td>yes</td>
+                                </tr>
+                                <tr>
+                                    <td>description</td>
+                                    <td>string (min:3)</td>
+                                    <td>yes</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <hr>
+                        HEADERS:
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+                                    <td>string (valid JWT token)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        EXAMPLE: <br>
+                        <code>
+                            <strong>request: </strong> <br>
+                            https://notes-rest-api-v1.herokuapp.com/api/notes <br>
+                            <strong>body: </strong> <br>
+                           { "title": "my first note", <br>
+                        "description": "this is my first note!"} <br>
+                            <strong>headers: </strong> <br>
+                            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkMzBmOTMzMTY1YzgzMzZjMGYwODEiLCJpYXQiOjE2NDgyNDQ2NjgsImV4cCI6MTY0ODI1OTA2OH0.yWXfapipl8UMSBj1qjoU6IyW1gpG_3v8kDKgTpDhwKk"
+
+                           
+                        </code>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div id="updateNote" class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> <span class="badge badge-primary"
+                                style="width: 65px;">PUT</span> -
+                            <strong>Update a note: </strong>
+                            <code>/notes/:id</code>
+                        </h4>
+                        <p class="text-muted">Logged in users can update their own notes. Only admins can
+                            update other notes.</p>
+                        PARAMS:
+                        <p class="text-muted">:id has to be a valid MongoID. </p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>:id</td>
+                                    <td>string (valid MongoID)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        <hr>
+                        BODY:
+                        <p class="text-muted">(Content-Type application JSON)</p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>title</td>
+                                    <td>string (min:3)</td>
+                                    <td>yes</td>
+                                </tr>
+                                <tr>
+                                    <td>description</td>
+                                    <td>string (min:3)</td>
+                                    <td>yes</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <hr>
+                        HEADERS:
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+                                    <td>string (valid JWT token)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        EXAMPLE: <br>
+                        <code>
+                            <strong>request: </strong> <br>
+                            https://notes-rest-api-v1.herokuapp.com/api/notes/623e53d6fcb791f994716601 <br>
+                            <strong>body: </strong> <br>
+                           { "title": "updated note", <br>
+                        "description": "updated description!"} <br>
+                            <strong>headers: </strong> <br>
+                            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkMzBmOTMzMTY1YzgzMzZjMGYwODEiLCJpYXQiOjE2NDgyNDQ2NjgsImV4cCI6MTY0ODI1OTA2OH0.yWXfapipl8UMSBj1qjoU6IyW1gpG_3v8kDKgTpDhwKk"
+
+                           
+                        </code>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div id="deleteNote" class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> <span class="badge badge-danger"
+                                style="width: 65px;">DEL</span> -
+                            <strong>Delete a note: </strong>
+                            <code>/notes/:id</code>
+                        </h4>
+                        <p class="text-muted">Logged in users can delete their own notes. Only admins can
+                            delete other notes.</p>
+                        PARAMS:
+                        <p class="text-muted">:id has to be a valid MongoID. </p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>:id</td>
+                                    <td>string (valid MongoID)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <hr>
+                        HEADERS:
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+                                    <td>string (valid JWT token)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        EXAMPLE: <br>
+                        <code>
+                            <strong>request: </strong> <br>
+                            https://notes-rest-api-v1.herokuapp.com/api/notes/623e53d6fcb791f994716601 <br>
+                                                      <strong>headers: </strong> <br>
+                            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkMzBmOTMzMTY1YzgzMzZjMGYwODEiLCJpYXQiOjE2NDgyNDQ2NjgsImV4cCI6MTY0ODI1OTA2OH0.yWXfapipl8UMSBj1qjoU6IyW1gpG_3v8kDKgTpDhwKk"
+
+                           
+                        </code>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div id="getAllUsers" class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> <span class="badge badge-success"
+                                style="width: 65px;">GET</span> -
+                            <strong>Get all users: </strong>
+                            <code>/search/users</code>
+                        </h4>
+                        <p class="text-muted">Logged <strong>Admins</strong> can retrieve all users. </p>
+
+
+                        HEADERS:
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+                                    <td>string (valid JWT token)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        EXAMPLE: <br>
+
+                        <code>
+                            <strong>request: </strong> <br>
+                            https://notes-rest-api-v1.herokuapp.com/api/search/users <br>
+                                                      <strong>headers: </strong> <br>
+                            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkMzBmOTMzMTY1YzgzMzZjMGYwODEiLCJpYXQiOjE2NDgyNDQ2NjgsImV4cCI6MTY0ODI1OTA2OH0.yWXfapipl8UMSBj1qjoU6IyW1gpG_3v8kDKgTpDhwKk"
+
+                           
+                        </code>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div id="getUserbyId" class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> <span class="badge badge-success"
+                                style="width: 65px;">GET</span> -
+                            <strong>Get a user by its ID: </strong>
+                            <code>/search/users/:id</code>
+                        </h4>
+                        <p class="text-muted">Logged <strong>Admins</strong> can retrieve any user by its ID. </p>
+                        PARAMS:
+                        <p class="text-muted">:id has to be a valid MongoID. </p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>:id</td>
+                                    <td>string (valid MongoID)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        HEADERS:
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+                                    <td>string (valid JWT token)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        EXAMPLE: <br>
+                        <code>
+                            <strong>request: </strong> <br>
+                            https://notes-rest-api-v1.herokuapp.com/api/search/users/623274f125b4053e66355bc2 <br>
+                                                      <strong>headers: </strong> <br>
+                            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkMzBmOTMzMTY1YzgzMzZjMGYwODEiLCJpYXQiOjE2NDgyNDQ2NjgsImV4cCI6MTY0ODI1OTA2OH0.yWXfapipl8UMSBj1qjoU6IyW1gpG_3v8kDKgTpDhwKk"
+
+                           
+                        </code>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div id="searchUser" class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> <span class="badge badge-success"
+                                style="width: 65px;">GET</span> -
+                            <strong>Search users by their Name or Mail: </strong>
+                            <code>/search/users/:params</code>
+                        </h4>
+                        <p class="text-muted">Logged <strong>Admins</strong> can retrieve users by searching, the search
+                            will retrieve all matches on Name and Email. </p>
+                        PARAMS:
+                        <p class="text-muted">:params any query to search. </p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>:params</td>
+                                    <td>string (valid MongoID)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        HEADERS:
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+                                    <td>string (valid JWT token)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        EXAMPLE: <br>
+                        <code>
+                            <strong>request: </strong> <br>
+                            https://notes-rest-api-v1.herokuapp.com/api/search/users/Alison <br>
+                                                      <strong>headers: </strong> <br>
+                            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkMzBmOTMzMTY1YzgzMzZjMGYwODEiLCJpYXQiOjE2NDgyNDQ2NjgsImV4cCI6MTY0ODI1OTA2OH0.yWXfapipl8UMSBj1qjoU6IyW1gpG_3v8kDKgTpDhwKk"
+
+                           
+                        </code>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div id="getAllNotes" class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> <span class="badge badge-success"
+                                style="width: 65px;">GET</span> -
+                            <strong>Get all notes: </strong>
+                            <code>/search/notes</code>
+                        </h4>
+                        <p class="text-muted">Logged <strong>Admins</strong> can retrieve all notes. </p>
+
+
+                        HEADERS:
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+                                    <td>string (valid JWT token)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        EXAMPLE: <br>
+
+                        <code>
+                            <strong>request: </strong> <br>
+                            https://notes-rest-api-v1.herokuapp.com/api/search/notes <br>
+                                                      <strong>headers: </strong> <br>
+                            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkMzBmOTMzMTY1YzgzMzZjMGYwODEiLCJpYXQiOjE2NDgyNDQ2NjgsImV4cCI6MTY0ODI1OTA2OH0.yWXfapipl8UMSBj1qjoU6IyW1gpG_3v8kDKgTpDhwKk"
+
+                           
+                        </code>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div id="getNotebyIdAdmin" class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold">
+                            <span class="badge badge-success" style="width: 65px;">GET</span> -
+                            <strong>Search notes by their Title, Description or User: </strong>
+                            <code>/search/notes/:params</code>
+                            </p>
+                        </h4>
+                        <p class="text-muted">Logged <strong>Admins</strong> can retrieve any user by its ID. </p>
+                        PARAMS:
+                        <p class="text-muted">:id has to be a valid MongoID. </p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>:id</td>
+                                    <td>string (valid MongoID)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        HEADERS:
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+                                    <td>string (valid JWT token)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        EXAMPLE: <br>
+                        <code>
+                            <strong>request: </strong> <br>
+                            https://notes-rest-api-v1.herokuapp.com/api/search/notes/623274f125b4053e66355bc2 <br>
+                                                      <strong>headers: </strong> <br>
+                            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkMzBmOTMzMTY1YzgzMzZjMGYwODEiLCJpYXQiOjE2NDgyNDQ2NjgsImV4cCI6MTY0ODI1OTA2OH0.yWXfapipl8UMSBj1qjoU6IyW1gpG_3v8kDKgTpDhwKk"
+
+                           
+                        </code>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <div id="searchNote" class="card shadow" style="border: 0; border-radius: 0;">
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold"> <span class="badge badge-success"
+                                style="width: 65px;">GET</span> -
+                            <strong>Search notes by their Name or Mail: </strong>
+                            <code>/search/notes/:params</code>
+                        </h4>
+                        <p class="text-muted">Logged <strong>Admins</strong> can retrieve notes by searching, the search
+                            will retrieve all matches on Title, Description or User. </p>
+                        PARAMS:
+                        <p class="text-muted">:params any query to search. </p>
+
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>:params</td>
+                                    <td>string (valid MongoID)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        HEADERS:
+                        <table class="table table-bordered  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">key</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">REQUIRED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>token</td>
+                                    <td>string (valid JWT token)</td>
+                                    <td>yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        EXAMPLE: <br>
+                        <code>
+                            <strong>request: </strong> <br>
+                            https://notes-rest-api-v1.herokuapp.com/api/search/notes/Any <br>
+                                                      <strong>headers: </strong> <br>
+                            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkMzBmOTMzMTY1YzgzMzZjMGYwODEiLCJpYXQiOjE2NDgyNDQ2NjgsImV4cCI6MTY0ODI1OTA2OH0.yWXfapipl8UMSBj1qjoU6IyW1gpG_3v8kDKgTpDhwKk"
+
+                           
+                        </code>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <div class="container mb-5">
+            <footer class="pt-4 my-md-5 pt-md-5 border-top">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h5 class="my-0 mr-md-auto font-weight-normal">Random Data <strong>API</strong></h5>
+                        <small class="d-block mb-3 text-muted">© 2017-2020
+                            <br>Built with ❤, ☕ and lots of 🍪 in Vancouver, BC</small>
+                        <a href="https://manoylo.me" target="_blank">
+                            <img src="https://res.cloudinary.com/manoylo/image/upload/v1583284399/manoylome_dhxyc0.png"
+                                style="width: 80px;">
+                        </a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+
+
+
+        </strong>
+</body><span
+    style="--colorTabBar:var(--colorAccentBg); --colorFg:#d3d9e3; --colorFgAlpha:#d3d9e31a; --colorFgIntense:#f9ffff; --colorFgFaded:#c9ced8; --colorFgFadedMore:#bec3cd; --colorFgFadedMost:#a6abb3; --colorBg:#2e2f37; --colorBgAlpha:#2e2f37e6; --colorBgAlphaHeavy:#2e2f37a6; --colorBgAlphaHeavier:#2e2f3740; --colorBgAlphaBlur:#2e2f37bf; --colorBgDark:#282931; --colorBgDarker:#23242b; --colorBgLight:#32333b; --colorBgLighter:#42434b; --colorBgLightIntense:#36373f; --colorBgIntense:#23242b; --colorBgIntenser:#1b1c24; --colorBgIntserAlpha:#181920eb; --colorBgInverse:#32333b; --colorBgInverser:#3e3f47; --colorBgFaded:#3a3b43; --backgroundBlur:blur(10px); --colorHighlightBg:#6590fd; --colorHighlightBgUnfocused:#565860; --colorHighlightBgAlpha:#6590fd1a; --colorHighlightBgDark:#4779e3; --colorHighlightFg:#ffffff; --colorHighlightFgAlpha:#ffffff80; --colorHighlightFgAlphaHeavy:#ffffff40; --colorAccentBg:#44454d; --colorAccentBgAlpha:#78798266; --colorAccentBgAlphaHeavy:#78798240; --colorAccentBgDark:#34353d; --colorAccentBgDarker:#1d1e25; --colorAccentBgFaded:#393939; --colorAccentBgFadedMore:#595a62; --colorAccentBgFadedMost:#787982; --colorAccentBorder:#3c3d45; --colorAccentBorderDark:#32333a; --colorAccentFg:#ffffff; --colorAccentFgFaded:#cacacb; --colorAccentFgAlpha:#ffffff40; --colorBorder:#1b1c24; --colorBorderDisabled:#23242b; --colorBorderSubtle:#212229; --colorBorderIntense:#0b0c15; --colorSuccessBg:#06a700; --colorSuccessBgAlpha:#06a7001a; --colorSuccessFg:#ffffff; --colorWarningBg:#efaf00; --colorWarningBgAlpha:#efaf001a; --colorWarningFg:#000000; --colorErrorBg:#c64539; --colorErrorBgAlpha:#c645391a; --colorErrorFg:#ffffff; --colorWindowBg:#2e2f37; --colorWindowFg:#ffffff; --radiusRound:100px; --radiusRounded:2px; --radiusRoundedLess:2px; --radius:6px; --radiusHalf:3px; --scrollbarWidth:12px; --colorImageCenterFg:rgb(255,255,255); --colorImageCenterFgAlpha:rgba(255,255,255,0.6); --colorImageCenterFgAlphaHeaviest:rgba(255,255,255,0.05); --colorImageCenterBg:rgb(21,23,28); --colorImageCenterBgAlpha:rgba(21,23,28,0.6); --colorImageCenterBgAlphaHeavy:rgba(21,23,28,0.3); --colorImageTopFg:rgb(255,255,255); --colorImageTopFgAlpha:rgba(255,255,255,0.6); --colorImageTopFgAlphaHeaviest:rgba(255,255,255,0.05); --colorImageTopBg:rgb(33,35,40); --colorImageTopBgAlpha:rgba(33,35,40,0.6); --colorImageTopBgAlphaHeavy:rgba(33,35,40,0.3); --colorImageRightFg:rgb(255,255,255); --colorImageRightFgAlpha:rgba(255,255,255,0.6); --colorImageRightFgAlphaHeaviest:rgba(255,255,255,0.05); --colorImageRightBg:rgb(21,23,28); --colorImageRightBgAlpha:rgba(21,23,28,0.6); --colorImageRightBgAlphaHeavy:rgba(21,23,28,0.3); --colorImageBottomFg:rgb(255,255,255); --colorImageBottomFgAlpha:rgba(255,255,255,0.6); --colorImageBottomFgAlphaHeaviest:rgba(255,255,255,0.05); --colorImageBottomBg:rgb(21,23,28); --colorImageBottomBgAlpha:rgba(21,23,28,0.6); --colorImageBottomBgAlphaHeavy:rgba(21,23,28,0.3); --colorImageLeftFg:rgb(255,255,255); --colorImageLeftFgAlpha:rgba(255,255,255,0.6); --colorImageLeftFgAlphaHeaviest:rgba(255,255,255,0.05); --colorImageLeftBg:rgb(128,23,23); --colorImageLeftBgAlpha:rgba(128,23,23,0.6); --colorImageLeftBgAlphaHeavy:rgba(128,23,23,0.3);"></span>
+
 </html>

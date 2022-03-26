@@ -8,12 +8,12 @@ const { generarJWT } = require( '../helpers/jwt' );
 
 const login = async ( req, res = response ) => {
 
-    const { correo, password } = req.body;
+    const { email, password } = req.body;
 
     try {
 
         // Verificar si el email existe
-        const usuario = await Usuario.findOne( { correo } );
+        const usuario = await Usuario.findOne( { email } );
         if ( !usuario ) {
             return res.status( 400 ).json( {
                 msg: 'User not found'
@@ -24,7 +24,7 @@ const login = async ( req, res = response ) => {
         const validPassword = bcryptjs.compareSync( password, usuario.password );
         if ( !validPassword ) {
             return res.status( 400 ).json( {
-                msg: 'Incorrect User/Pass'
+                msg: 'Incorrect combination'
             } );
         }
 

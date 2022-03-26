@@ -50,11 +50,21 @@ const notesPut = async ( req, res = response ) => {
     try {
         const { id } = req.params;
         const { title, description } = req.body;
-        //const note = await Note.findOneAndUpdate( { $and: [ { _id: id }, { user: req.user._id } ] }, { title, description } );
-        const note = await Note.findOneAndUpdate( { _id: id, user: req.user._id }, { title, description } );
-        if ( !note ) return res.status( 401 ).json( { msg: 'Note dosnt exist' } );
+        // search the note asked
+        const note = await Note.findById( { _id: id } );
+        if ( !note ) return res.status( 401 ).json( { msg: 'note not found' } );
 
-        res.status( 200 ).json( { msg: 'Note updated succesfuly' } )
+        // check if token is admin
+        const isAdmin = ( req.admin ) ? true : false;
+
+        // check if requesting user is the owner of the note
+        if ( String( req.user._id ) === String( note.user ) || isAdmin ) {
+            console.log( title, description );
+            await Note.findByIdAndUpdate( { _id: id }, { title, description } );
+            return res.status( 200 ).json( { msg: 'Note updated succesfuly' } )
+        }
+
+        res.status( 401 ).json( { msg: 'bad request' } )
     } catch ( err ) {
         console.warn( err );
         res.status( 500 );
@@ -65,11 +75,21 @@ const notesPut = async ( req, res = response ) => {
 const notesDelete = async ( req, res = response ) => {
     try {
         const { id } = req.params;
-        //const note = await Note.findOneAndDelete( { $and: [ { _id: id }, { user: req.user._id } ] } );
-        const note = await Note.findOneAndDelete( { _id: id, user: req.user._id } );
-        if ( !note ) return res.status( 401 ).json( { msg: 'Note dosnt exist' } );
+        // search the note asked
+        const note = await Note.findById( { _id: id } );
+        if ( !note ) return res.status( 401 ).json( { msg: 'note not found' } );
 
-        res.status( 200 ).json( { msg: 'Note deleted succesfuly' } )
+        // check if token is admin
+        const isAdmin = ( req.admin ) ? true : false;
+
+        // check if requesting user is the owner of the note
+        if ( String( req.user._id ) === String( note.user ) || isAdmin ) {
+            console.log( title, description );
+            await Note.findByIdAndDelete( { _id: id } );
+            return res.status( 200 ).json( { msg: 'Note deleted succesfuly' } )
+        }
+
+        res.status( 401 ).json( { msg: 'bad request' } )
     } catch ( err ) {
         console.warn( err );
         res.status( 500 );

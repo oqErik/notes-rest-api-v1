@@ -2,11 +2,6 @@
 
 <head>
     <title>Notes Rest API</title>
-    <meta name="csrf-param" content="authenticity_token">
-    <meta name="csrf-token"
-        content="AWC8nCCuuPwC8UwjP/LdXBHs9oYBe34L340M6Kiuh+7oKdH1ssJA1uCFGT5+eikn5dtujF+dr0LyMxM/0C0AWg==">
-
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" media="all"
@@ -1152,11 +1147,11 @@
                     <div class="card-body">
                         <h4 class="card-title font-weight-bold">
                             <span class="badge badge-success" style="width: 65px;">GET</span> -
-                            <strong>Search notes by their Title, Description or User: </strong>
-                            <code>/search/notes/:params</code>
+                            <strong>Search notes by its ID: </strong>
+                            <code>/search/notes/:id</code>
                             </p>
                         </h4>
-                        <p class="text-muted">Logged <strong>Admins</strong> can retrieve any user by its ID. </p>
+                        <p class="text-muted">Logged <strong>Admins</strong> can retrieve any note by its ID. </p>
                         PARAMS:
                         <p class="text-muted">:id has to be a valid MongoID. </p>
 
@@ -1217,7 +1212,7 @@
                     <div class="card-body">
                         <h4 class="card-title font-weight-bold"> <span class="badge badge-success"
                                 style="width: 65px;">GET</span> -
-                            <strong>Search notes by their Name or Mail: </strong>
+                            <strong>Search notes by their Title, Description or User: </strong>
                             <code>/search/notes/:params</code>
                         </h4>
                         <p class="text-muted">Logged <strong>Admins</strong> can retrieve notes by searching, the search
@@ -1289,13 +1284,10 @@
             <footer class="pt-4 my-md-5 pt-md-5 border-top">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h5 class="my-0 mr-md-auto font-weight-normal">Random Data <strong>API</strong></h5>
-                        <small class="d-block mb-3 text-muted">© 2017-2020
-                            <br>Built with ❤, ☕ and lots of 🍪 in Vancouver, BC</small>
-                        <a href="https://manoylo.me" target="_blank">
-                            <img src="https://res.cloudinary.com/manoylo/image/upload/v1583284399/manoylome_dhxyc0.png"
-                                style="width: 80px;">
-                        </a>
+                        <h5 class="my-0 mr-md-auto font-weight-normal">Notes Rest <strong>API</strong></h5>
+                        <small class="d-block mb-3 text-muted">2022
+                            <br>Erik Alexander Ortiz Quijano</small>
+
                     </div>
                 </div>
             </footer>

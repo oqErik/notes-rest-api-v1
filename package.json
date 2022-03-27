@@ -8,7 +8,7 @@
     "dev": "nodemon app"
   },
   "keywords": [],
-  "author": "",
+  "author": "Erik Ortiz",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

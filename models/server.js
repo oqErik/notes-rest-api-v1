@@ -52,7 +52,7 @@ class Server {
 
 	listen() {
 		this.app.listen( this.port, () => {
-			console.log( `Server runnin on port:  ${this.port}` );
+			console.log( `Server runnin on http://localhost:${this.port}` );
 		} );
 	}
 }

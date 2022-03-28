@@ -49,14 +49,14 @@ List of available routes:
 `POST /api/users` - create new user\
 `PUT  /api/users/:id` - update user\
 `DEL  /api/users/:id` - delete user\
-`POST /api/auth/login` - login\
+`POST /api/auth/login` - login
 
 **Notes routes**:\
 `GET  /api/notes/` - Get all notes from a user\
 `GET  /api/notes/:id` - Get a note\
 `POST /api/notes` - create new note\
 `PUT  /api/notes/:id` - update note\
-`DEL  /api/notes/:id` - delete note\
+`DEL  /api/notes/:id` - delete note
 
 **Search routes - Admins only**:\
 `GET  /api/search/users` - Get all users\
@@ -64,4 +64,4 @@ List of available routes:
 `GET  /api/search/users/:query` - Search users by their Name or Mail\
 `GET  /api/search/notes` - Get all notes\
 `GET  /api/search/notes/:id` - Get a note\
-`GET  /api/search/notes/:query` - Search notes by their Title, Description or User\
+`GET  /api/search/notes/:query` - Search notes by their Title, Description or User

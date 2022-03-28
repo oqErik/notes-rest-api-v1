@@ -58,7 +58,7 @@ List of available routes:
 `PUT  /api/notes/:id` - update note\
 `DEL  /api/notes/:id` - delete note\
 
-**Search routes** - Admins only:\ 
+**Search routes - Admins only**:\
 `GET  /api/search/users` - Get all users\
 `GET  /api/search/users/:id` - Get a users\
 `GET  /api/search/users/:query` - Search users by their Name or Mail\

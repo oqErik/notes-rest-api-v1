@@ -4,14 +4,14 @@ A simple but efficient Rest API for users to create personal notes <br>
 I have uploaded the API to heroku and u can check at: [https://notes-rest-api-v1.herokuapp.com](https://notes-rest-api-v1.herokuapp.com)
 ## Installation 
 
-1.- Dowload the repo locally
+1.- Dowload the repo locally.
 
 2.- Install the dependencies:
 ```
 npm install
 ```
 
-3.- Set the environment variables:
+3.- Set the environment variables (create a new .env file, see .env.example).
 
 
 4.- Run locally:

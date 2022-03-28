@@ -4,15 +4,42 @@
     <title>Notes Rest API</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        #myBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            background-color: gray;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        #myBtn:hover {
+            background-color: black;
+        }
+
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
+    <button onclick="darkMode()">Darkmode</button>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
         <h5 class="my-0 mr-md-auto font-weight-normal">Notes REST <strong>API</strong></h5>
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="https://www.linkedin.com/in/erik-ortiz-q" target=”_blank”><strong>My
                     LinkedIn</strong></a>
-            <a class="p-2 text-dark" href="CV.pdf">My CV</a>
+            <a class="p-2 text-dark " target=”_blank” href="CV.pdf">My CV</a>
         </nav>
     </div>
 
@@ -54,7 +81,8 @@
                         </p>
 
                         <p class="lead">
-                            You can start using this API by creating a new acc or loggin with this Admin: <br>
+                            You can start using this API by <a href="#addUser">creating a new account </a> or <a
+                                href="#loginUser">loggin with this Admin</a> : <br>
                             <code>email:admin123@fakemail.com <br>
                                 password:admin123
                             </code>
@@ -223,7 +251,7 @@
                                 user: </strong>
                             <code>/users</code>
                         </h4>
-                        <p class="text-muted">Add a new user. Only admins can add other admins</p>
+                        <p class="text-muted">Any user can create new accounts. Only admins can add other admins</p>
                         <hr>
 
 
@@ -457,11 +485,7 @@
 
                             </tbody>
                         </table>
-
                         <hr>
-
-
-
                         HEADERS:
                         <p class="text-muted">If you are an admin you need to send a valid JWT logged as admin to delete
                             other users. </p>
@@ -498,9 +522,6 @@
                 </div>
             </div>
         </div>
-
-
-
 
         <div class="row mt-3 mb-3">
             <div class="col-md-12">
@@ -1081,7 +1102,6 @@
             </div>
         </div>
 
-
         <div class="row mt-3 mb-3">
             <div class="col-md-12">
                 <div id="getAllNotes" class="card shadow" style="border: 0; border-radius: 0;">
@@ -1259,15 +1279,6 @@
             </div>
         </div>
 
-
-
-
-
-
-
-
-
-
         <div class="container mb-5">
             <footer class="pt-4 my-md-5 pt-md-5 border-top">
                 <div class="row">
@@ -1281,11 +1292,29 @@
             </footer>
         </div>
 
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Go to the top</button>
 
+        <script>
+            //Get the button
+            var mybutton = document.getElementById( "myBtn" );
 
+            // When the user scrolls down 600px from the top of the document, show the button
+            window.onscroll = function () { scrollFunction() };
 
-        </strong>
-</body><span
-    style="--colorTabBar:var(--colorAccentBg); --colorFg:#d3d9e3; --colorFgAlpha:#d3d9e31a; --colorFgIntense:#f9ffff; --colorFgFaded:#c9ced8; --colorFgFadedMore:#bec3cd; --colorFgFadedMost:#a6abb3; --colorBg:#2e2f37; --colorBgAlpha:#2e2f37e6; --colorBgAlphaHeavy:#2e2f37a6; --colorBgAlphaHeavier:#2e2f3740; --colorBgAlphaBlur:#2e2f37bf; --colorBgDark:#282931; --colorBgDarker:#23242b; --colorBgLight:#32333b; --colorBgLighter:#42434b; --colorBgLightIntense:#36373f; --colorBgIntense:#23242b; --colorBgIntenser:#1b1c24; --colorBgIntserAlpha:#181920eb; --colorBgInverse:#32333b; --colorBgInverser:#3e3f47; --colorBgFaded:#3a3b43; --backgroundBlur:blur(10px); --colorHighlightBg:#6590fd; --colorHighlightBgUnfocused:#565860; --colorHighlightBgAlpha:#6590fd1a; --colorHighlightBgDark:#4779e3; --colorHighlightFg:#ffffff; --colorHighlightFgAlpha:#ffffff80; --colorHighlightFgAlphaHeavy:#ffffff40; --colorAccentBg:#44454d; --colorAccentBgAlpha:#78798266; --colorAccentBgAlphaHeavy:#78798240; --colorAccentBgDark:#34353d; --colorAccentBgDarker:#1d1e25; --colorAccentBgFaded:#393939; --colorAccentBgFadedMore:#595a62; --colorAccentBgFadedMost:#787982; --colorAccentBorder:#3c3d45; --colorAccentBorderDark:#32333a; --colorAccentFg:#ffffff; --colorAccentFgFaded:#cacacb; --colorAccentFgAlpha:#ffffff40; --colorBorder:#1b1c24; --colorBorderDisabled:#23242b; --colorBorderSubtle:#212229; --colorBorderIntense:#0b0c15; --colorSuccessBg:#06a700; --colorSuccessBgAlpha:#06a7001a; --colorSuccessFg:#ffffff; --colorWarningBg:#efaf00; --colorWarningBgAlpha:#efaf001a; --colorWarningFg:#000000; --colorErrorBg:#c64539; --colorErrorBgAlpha:#c645391a; --colorErrorFg:#ffffff; --colorWindowBg:#2e2f37; --colorWindowFg:#ffffff; --radiusRound:100px; --radiusRounded:2px; --radiusRoundedLess:2px; --radius:6px; --radiusHalf:3px; --scrollbarWidth:12px; --colorImageCenterFg:rgb(255,255,255); --colorImageCenterFgAlpha:rgba(255,255,255,0.6); --colorImageCenterFgAlphaHeaviest:rgba(255,255,255,0.05); --colorImageCenterBg:rgb(21,23,28); --colorImageCenterBgAlpha:rgba(21,23,28,0.6); --colorImageCenterBgAlphaHeavy:rgba(21,23,28,0.3); --colorImageTopFg:rgb(255,255,255); --colorImageTopFgAlpha:rgba(255,255,255,0.6); --colorImageTopFgAlphaHeaviest:rgba(255,255,255,0.05); --colorImageTopBg:rgb(33,35,40); --colorImageTopBgAlpha:rgba(33,35,40,0.6); --colorImageTopBgAlphaHeavy:rgba(33,35,40,0.3); --colorImageRightFg:rgb(255,255,255); --colorImageRightFgAlpha:rgba(255,255,255,0.6); --colorImageRightFgAlphaHeaviest:rgba(255,255,255,0.05); --colorImageRightBg:rgb(21,23,28); --colorImageRightBgAlpha:rgba(21,23,28,0.6); --colorImageRightBgAlphaHeavy:rgba(21,23,28,0.3); --colorImageBottomFg:rgb(255,255,255); --colorImageBottomFgAlpha:rgba(255,255,255,0.6); --colorImageBottomFgAlphaHeaviest:rgba(255,255,255,0.05); --colorImageBottomBg:rgb(21,23,28); --colorImageBottomBgAlpha:rgba(21,23,28,0.6); --colorImageBottomBgAlphaHeavy:rgba(21,23,28,0.3); --colorImageLeftFg:rgb(255,255,255); --colorImageLeftFgAlpha:rgba(255,255,255,0.6); --colorImageLeftFgAlphaHeaviest:rgba(255,255,255,0.05); --colorImageLeftBg:rgb(128,23,23); --colorImageLeftBgAlpha:rgba(128,23,23,0.6); --colorImageLeftBgAlphaHeavy:rgba(128,23,23,0.3);"></span>
+            function scrollFunction() {
+                if ( document.body.scrollTop > 600 || document.documentElement.scrollTop > 600 ) {
+                    mybutton.style.display = "block";
+                } else {
+                    mybutton.style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+        </script>
+</body>
 
 </html>

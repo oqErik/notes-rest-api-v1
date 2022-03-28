@@ -31,7 +31,6 @@ PORT=3000
 # URL of the Mongo DB
 MONGODB_CNN=mongodb://127.0.0.1:27017/node-boilerplate
 
-# JWT
 # JWT secret key
 SECRETORPRIVATEKEY=thisisasamplesecret
 

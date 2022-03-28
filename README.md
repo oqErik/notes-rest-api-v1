@@ -1,7 +1,7 @@
 # Notes REST API
 A simple but efficient Rest API for users to create personal notes <br>
 
-I have uploaded the API to heroku and u can check at: [notes-rest-api-v1.herokuapp.com](notes-rest-api-v1.herokuapp.com)
+I have uploaded the API to heroku and u can check at: [https://notes-rest-api-v1.herokuapp.com](https://notes-rest-api-v1.herokuapp.com)
 ## Installation 
 
 1.- Dowload the repo locally

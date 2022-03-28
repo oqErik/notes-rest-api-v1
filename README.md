@@ -20,14 +20,14 @@ node app
 ```
 ## Environment Variables
 
-The environment variables can be found and modified in the `.env` file. They come with these default values:
+The environment variables can be found and modified in the `.env` file:
 
 ```
 # Port number
 PORT=3000
 
 # URL of the Mongo DB
-MONGODB_CNN=mongodb://127.0.0.1:27017/node-boilerplate
+MONGODB_CNN=mongodb://127.0.0.1:27017/
 
 # JWT secret key
 SECRETORPRIVATEKEY=thisisasamplesecret

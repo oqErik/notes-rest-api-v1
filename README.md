@@ -12,13 +12,11 @@ npm install
 ```
 
 3.- Set the environment variables:
-```
-copy .env.example .env
-```
+
 
 4.- Run locally:
 ```
-nodemon app
+node app
 ```
 ## Environment Variables
 

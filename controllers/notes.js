@@ -84,7 +84,6 @@ const notesDelete = async ( req, res = response ) => {
 
         // check if requesting user is the owner of the note
         if ( String( req.user._id ) === String( note.user ) || isAdmin ) {
-            console.log( title, description );
             await Note.findByIdAndDelete( { _id: id } );
             return res.status( 200 ).json( { msg: 'Note deleted succesfuly' } )
         }

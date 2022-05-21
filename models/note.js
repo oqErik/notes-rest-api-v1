@@ -20,7 +20,7 @@ const NoteSchema = Schema( {
 } );
 
 NoteSchema.methods.toJSON = function () {
-    const { __v, createdAt, updatedAt, ...note } = this.toObject();
+    const { __v, updatedAt, ...note } = this.toObject();
 
     return note;
 }

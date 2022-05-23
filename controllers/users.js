@@ -55,11 +55,11 @@ const usuariosPut = async ( req, res = response ) => {
         // UPDATE IF ADMIN OR LOGGED USER THEMSELF
         if ( isAdmin || String( req.user._id ) === String( idUsertoUpdate ) ) {
             const usertoUpdate = await Usuario.findByIdAndUpdate( idUsertoUpdate, resto );
-            if ( !usertoUpdate ) return res.status( 401 ).json( { msg: 'user not found' } );
+            if ( !usertoUpdate ) return res.status( 401 ).json( { errors: [ 'User not found' ] } );
             return res.status( 200 ).json( { msg: `User: ${usertoUpdate.name} updated succesfully!` } );
         }
 
-        res.status( 401 ).json( { msg: 'bad request' } );
+        res.status( 401 ).json( { errors: [ 'Bad request' ] } );
     } catch ( error ) {
         console.warn( error );
         res.status( 500 );
@@ -74,11 +74,11 @@ const usuariosDelete = async ( req, res = response ) => {
         // IF ADMIN OR USER THEMSELF
         if ( req.user.admin == true || String( req.user._id ) === String( idUsertoDelete ) ) {
             const userDelete = await Usuario.findByIdAndDelete( idUsertoDelete );
-            if ( !userDelete ) return res.status( 401 ).json( { msg: 'user not found' } );
+            if ( !userDelete ) return res.status( 401 ).json( { errors: [ 'User not found' ] } );
             return res.status( 200 ).json( { msg: `User: ${userDelete.name} deleted succesfully!` } );
         }
 
-        res.status( 401 ).json( { msg: 'bad request' } );
+        res.status( 401 ).json( { errors: [ 'Bad request' ] } );
     } catch ( error ) {
         console.warn( error );
         res.status( 500 );

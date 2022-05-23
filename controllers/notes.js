@@ -7,7 +7,7 @@ const notesGet = async ( req, res = response ) => {
     try {
         const { user } = req;
         const notes = await Note.find( { user } );
-        if ( notes.length === 0 ) return res.status( 202 ).json( { msg: 'there are no notes from this user yet' } );
+        if ( notes.length === 0 ) return res.status( 202 ).json( { erros: [ 'There are no notes from this user' ] } );
         res.status( 200 ).json( notes );
     } catch ( error ) {
         console.warn( error );
@@ -21,7 +21,7 @@ const notesGetByID = async ( req, res = response ) => {
         const { id: noteID } = req.params;
         //const note = await Note.findOne( { $and: [ { user: req.user._id }, { _id: noteID } ] } );
         const note = await Note.findOne( { user: req.user._id, _id: noteID } );
-        if ( !note ) return res.status( 401 ).json( { msg: 'Note dosnt exist' } );
+        if ( !note ) return res.status( 401 ).json( { erros: [ 'Note dosnt exist' ] } );
 
         res.status( 200 ).json( note );
     } catch ( err ) {
@@ -52,7 +52,7 @@ const notesPut = async ( req, res = response ) => {
         const { title, description } = req.body;
         // search the note asked
         const note = await Note.findById( { _id: id } );
-        if ( !note ) return res.status( 401 ).json( { msg: 'note not found' } );
+        if ( !note ) return res.status( 401 ).json( { erros: [ 'Note not found' ] } );
 
         // check if token is admin
         const isAdmin = ( req.admin ) ? true : false;
@@ -64,12 +64,13 @@ const notesPut = async ( req, res = response ) => {
             return res.status( 200 ).json( { msg: 'Note updated succesfuly' } )
         }
 
-        res.status( 401 ).json( { msg: 'bad request' } )
+        res.status( 401 ).json( { erros: [ 'Bad request' ] } )
     } catch ( err ) {
         console.warn( err );
         res.status( 500 );
     }
 }
+
 
 // DELETE A NOTE
 const notesDelete = async ( req, res = response ) => {
@@ -77,7 +78,7 @@ const notesDelete = async ( req, res = response ) => {
         const { id } = req.params;
         // search the note asked
         const note = await Note.findById( { _id: id } );
-        if ( !note ) return res.status( 401 ).json( { msg: 'note not found' } );
+        if ( !note ) return res.status( 401 ).json( { erros: [ 'Note not found' ] } );
 
         // check if token is admin
         const isAdmin = ( req.admin ) ? true : false;
@@ -85,10 +86,10 @@ const notesDelete = async ( req, res = response ) => {
         // check if requesting user is the owner of the note
         if ( String( req.user._id ) === String( note.user ) || isAdmin ) {
             await Note.findByIdAndDelete( { _id: id } );
-            return res.status( 200 ).json( { msg: 'Note deleted succesfuly' } )
+            return res.status( 200 ).json( { smg: 'Note deleted succesfuly' } )
         }
 
-        res.status( 401 ).json( { msg: 'bad request' } )
+        res.status( 401 ).json( { erros: [ 'Bad request' ] } )
     } catch ( err ) {
         console.warn( err );
         res.status( 500 );

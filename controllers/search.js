@@ -25,7 +25,7 @@ const searchUsers = async ( req, res = response ) => {
         const isMongoID = ObjectId.isValid( term );
         if ( isMongoID ) {
             const user = await Usuario.findById( term )
-            if ( !user ) return res.status( 401 ).json( { errors: [ 'User not found' ] } );
+            if ( !user ) return res.status( 401 ).json( { errors: [ { msg: 'User not found' } ] } );
             return res.status( 200 ).json( user );
         }
 
@@ -64,7 +64,7 @@ const searchNotes = async ( req, res = response ) => {
         const isMongoID = ObjectId.isValid( term );
         if ( isMongoID ) {
             const note = await Note.findById( term )
-            if ( !note ) return res.status( 401 ).json( { errors: [ 'Note not found' ] } );
+            if ( !note ) return res.status( 401 ).json( { errors: [ { msg: 'Note not found' } ] } );
             return res.status( 200 ).json( note );
         }
 

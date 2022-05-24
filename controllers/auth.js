@@ -16,7 +16,7 @@ const login = async ( req, res = response ) => {
         const usuario = await Usuario.findOne( { email } );
         if ( !usuario ) {
             return res.status( 400 ).json( {
-                erros: [ 'User not found' ]
+                errors: [ { msg: 'User not found' } ]
             } );
         }
 
@@ -24,7 +24,7 @@ const login = async ( req, res = response ) => {
         const validPassword = bcryptjs.compareSync( password, usuario.password );
         if ( !validPassword ) {
             return res.status( 400 ).json( {
-                errors: [ 'Incorrect combination' ]
+                errors: [ { msg: 'Incorrect combination' } ]
             } );
         }
 
@@ -39,7 +39,7 @@ const login = async ( req, res = response ) => {
     } catch ( error ) {
         console.log( error )
         res.status( 500 ).json( {
-            errors: [ 'Speak to an admin, something went wrong' ]
+            errors: [ { msg: 'Speak to an admin, something went wrong' } ]
         } );
     }
 

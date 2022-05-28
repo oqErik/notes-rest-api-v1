@@ -1,6 +1,7 @@
 const { response } = require( "express" );
 
 const Note = require( '../models/note' );
+const { checkAdmin } = require( '../helpers/db-validators' );
 
 // GET ALL NOTES FROM USER
 const notesGet = async ( req, res = response ) => {
@@ -55,7 +56,7 @@ const notesPut = async ( req, res = response ) => {
         if ( !note ) return res.status( 401 ).json( { errors: [ { msg: 'Note not found' } ] } );
 
         // check if token is admin
-        const isAdmin = ( req.admin ) ? true : false;
+        const isAdmin = await checkAdmin( req.header( 'token' ) )
 
         // check if requesting user is the owner of the note
         if ( String( req.user._id ) === String( note.user ) || isAdmin ) {
@@ -81,7 +82,7 @@ const notesDelete = async ( req, res = response ) => {
         if ( !note ) return res.status( 401 ).json( { errors: [ { msg: 'Note not found' } ] } );
 
         // check if token is admin
-        const isAdmin = ( req.admin ) ? true : false;
+        const isAdmin = await checkAdmin( req.header( 'token' ) )
 
         // check if requesting user is the owner of the note
         if ( String( req.user._id ) === String( note.user ) || isAdmin ) {

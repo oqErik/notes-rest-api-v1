@@ -71,8 +71,10 @@ const usuariosPut = async ( req, res = response ) => {
 const usuariosDelete = async ( req, res = response ) => {
     try {
         const { id: idUsertoDelete } = req.params;
+        const isAdmin = await checkAdmin( req.header( 'token' ) )
+
         // IF ADMIN OR USER THEMSELF
-        if ( req.user.admin == true || String( req.user._id ) === String( idUsertoDelete ) ) {
+        if ( isAdmin || String( req.user._id ) === String( idUsertoDelete ) ) {
             const userDelete = await Usuario.findByIdAndDelete( idUsertoDelete );
             if ( !userDelete ) return res.status( 401 ).json( { errors: [ { msg: 'User not found' } ] } );
             return res.status( 200 ).json( { msg: `User: ${userDelete.name} deleted succesfully!` } );

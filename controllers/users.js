@@ -75,6 +75,11 @@ const usuariosDelete = async ( req, res = response ) => {
 
         // IF ADMIN OR USER THEMSELF
         if ( isAdmin || String( req.user._id ) === String( idUsertoDelete ) ) {
+            // Cascaade deliting
+            Usuario.pre( 'findByIdAndDelete', function ( next ) {
+                var person = this;
+                person.model( 'Notes' ).deleteMany( { user: person._id }, next );
+            } );
             const userDelete = await Usuario.findByIdAndDelete( idUsertoDelete );
             if ( !userDelete ) return res.status( 401 ).json( { errors: [ { msg: 'User not found' } ] } );
             return res.status( 200 ).json( { msg: `User: ${userDelete.name} deleted succesfully!` } );

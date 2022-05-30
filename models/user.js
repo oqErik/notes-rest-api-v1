@@ -28,6 +28,18 @@ const UsuarioSchema = Schema( {
     timestamps: true
 } );
 
+/* UsuarioSchema.pre( 'findByIdAndDelete', function ( next ) {
+    const personId = this._id;
+    mongoose.model( "note" ).deleteMany( { 'user': personId }, function ( err, result ) {
+        if ( err ) {
+            console.log( `[error] ${err}` );
+            next( err );
+        } else {
+            console.log( 'success' );
+            next();
+        }
+    } );
+} ); */
 
 
 UsuarioSchema.methods.toJSON = function () {

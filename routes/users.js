@@ -10,7 +10,8 @@ const { emailExiste } = require( '../helpers/db-validators' );
 const {
     usuariosPut,
     usuariosPost,
-    usuariosDelete } = require( '../controllers/users' );
+    usuariosDelete,
+    getProfile } = require( '../controllers/users' );
 
 const router = Router();
 
@@ -44,5 +45,12 @@ router.delete( '/:id',
         validarCampos
     ],
     usuariosDelete );
+
+// GET PROFILE
+router.get( '/',
+    [
+        validarJWT,
+    ],
+    getProfile );
 
 module.exports = router;

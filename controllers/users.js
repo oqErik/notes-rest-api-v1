@@ -87,9 +87,14 @@ const usuariosDelete = async ( req, res = response ) => {
     }
 }
 
+const getProfile = async ( req, res = response ) => {
+    const { user } = req
+    return res.status( 200 ).json( user );
+}
 
 module.exports = {
     usuariosPost,
     usuariosPut,
     usuariosDelete,
+    getProfile,
 }

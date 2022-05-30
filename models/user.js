@@ -28,19 +28,11 @@ const UsuarioSchema = Schema( {
     timestamps: true
 } );
 
-/* UsuarioSchema.pre( 'findByIdAndDelete', function ( next ) {
-    const personId = this._id;
-    mongoose.model( "note" ).deleteMany( { 'user': personId }, function ( err, result ) {
-        if ( err ) {
-            console.log( `[error] ${err}` );
-            next( err );
-        } else {
-            console.log( 'success' );
-            next();
-        }
-    } );
-} ); */
-
+// Cascaade deleting
+UsuarioSchema.pre( 'findByIdAndDelete', function ( next ) {
+    var person = this;
+    person.model( 'Notes' ).deleteMany( { user: person._id }, next );
+} );
 
 UsuarioSchema.methods.toJSON = function () {
     const { __v, password, createdAt, updatedAt, ...usuario } = this.toObject();

@@ -31,7 +31,7 @@ router.put( '/:id',
     [
         validarJWT,
         check( 'name', 'name must contain between 3 and 24 characters' ).isLength( { min: 3, max: 24 } ),
-        check( 'password', 'password must contain between 3 and 24 characters' ).isLength( { min: 3, max: 24 } ),
+        //check( 'password', 'password must contain between 3 and 24 characters' ).isLength( { min: 3, max: 24 } ),
         check( 'id', 'not a valid ID' ).isMongoId(),
         validarCampos
     ],

@@ -75,9 +75,10 @@ const usuariosDelete = async ( req, res = response ) => {
 
         // IF ADMIN OR USER THEMSELF
         if ( isAdmin || String( req.user._id ) === String( idUsertoDelete ) ) {
-            const userDelete = await Usuario.findByIdAndDelete( idUsertoDelete );
-            if ( !userDelete ) return res.status( 401 ).json( { errors: [ { msg: 'User not found' } ] } );
-            return res.status( 200 ).json( { msg: `User: ${userDelete.name} deleted succesfully!` } );
+            const user = await Usuario.findOne( { _id: idUsertoDelete } )
+            if ( !user ) return res.status( 401 ).json( { errors: [ { msg: 'User not found' } ] } );
+            await user.deleteOne()
+            return res.status( 200 ).json( { msg: `User deleted succesfully!` } );
         }
 
         res.status( 401 ).json( { errors: [ { msg: 'Bad request' } ] } );

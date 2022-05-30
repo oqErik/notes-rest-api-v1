@@ -29,14 +29,12 @@ const UsuarioSchema = Schema( {
 } );
 
 // Cascaade deleting
-UsuarioSchema.pre( 'findByIdAndDelete', function ( next ) {
-    var person = this;
-    person.model( 'Notes' ).deleteMany( { user: person._id }, next );
+UsuarioSchema.pre( 'deleteOne', { document: true }, function ( next ) {
+    this.model( 'Note' ).deleteMany( { user: this._id }, next );
 } );
 
 UsuarioSchema.methods.toJSON = function () {
     const { __v, password, createdAt, updatedAt, ...usuario } = this.toObject();
-
     return usuario;
 }
 

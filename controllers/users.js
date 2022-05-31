@@ -45,7 +45,7 @@ const usuariosPut = async ( req, res = response ) => {
         const { id: idUsertoUpdate } = req.params;
         const { password, email, ...resto } = req.body;
         // ECRYPT PASS
-        if ( password ) {
+        if ( password?.length === 0 ) {
             if ( password.length < 3 || password.length > 24 ) return res.status( 401 ).json( { errors: [ { msg: 'password must contain between 3 and 24 characters' } ] } );
             const salt = bcryptjs.genSaltSync();
             resto.password = bcryptjs.hashSync( password, salt );

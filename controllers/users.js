@@ -10,13 +10,13 @@ const { checkAdmin } = require( '../helpers/db-validators' );
 // ONLY ADMINS CAN CREATE OTHER ADMINS
 const usuariosPost = async ( req, res = response ) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password, img = '' } = req.body;
         let { admin = false } = req.body;
 
         // Checar si admin
         const isAdmin = await checkAdmin( req.header( 'token' ) )
         if ( !isAdmin ) admin = false;
-        const user = new Usuario( { name, email, password, admin } );
+        const user = new Usuario( { name, email, password, admin, img } );
 
         // Encriptar la contraseña
         const salt = bcryptjs.genSaltSync();
